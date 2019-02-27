@@ -1,0 +1,40 @@
+{
+  "name": "care-line-api",
+  "version": "1.0.0",
+  "description": "Care line backend",
+  "main": "index.js",
+  "scripts": {
+    "compile": "./node_modules/.bin/tsc",
+    "compile:dev": "./node_modules/.bin/tsc --watch",
+    "start": "node build/index.js",
+    "start:dev": "./node_modules/.bin/nodemon --watch build build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soudergt/Care-Line-api.git"
+  },
+  "author": "Garrett Souders",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Soudergt/Care-Line-api/issues"
+  },
+  "homepage": "https://github.com/Soudergt/Care-Line-api#readme",
+  "dependencies": {
+    "fastify": "^2.0.0",
+    "reflect-metadata": "^0.1.10",
+    "fastify-cors": "^0.1.0",
+    "cors": "^2.8.5",
+    "mssql": "^4.3.2",
+    "typeorm": "0.2.12",
+    "config": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^10.1.2",
+    "@types/config": "0.0.34",
+    "nodemon": "^1.18.10",
+    "ts-node": "3.3.0",
+    "tslint": "~5.11.0",
+    "typescript": "3.1.1"
+  }
+}
