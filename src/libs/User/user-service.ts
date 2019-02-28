@@ -10,7 +10,7 @@ export class UserService {
     // return users;
   }
 
-  public getUser(uid: number): Promise<any> {
+  public getUser(uid: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const user = {
         id: 10,

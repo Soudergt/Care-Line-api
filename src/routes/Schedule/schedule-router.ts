@@ -4,117 +4,117 @@ import { ScheduleService } from '../../libs/Schedule/schedule-service';
 
 export class ScheduleRouter {
   constructor(fastify: FastifyInstance) {
-    fastify.route({
-      handler: this.getEvents,
-      url: '/schedule/getEvents/:date',
-      method: 'GET',
-      schema: {
-        querystring: {
-          date: {
-            description: 'Selected Date',
-            type: 'Date'
-          }
-        },
-        response: {
-          200: {
-            properties: {
-              user: { 
-                type: 'object' 
-              },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.getEvents,
+    //   url: '/schedule/getEvents/:date',
+    //   method: 'GET',
+    //   schema: {
+    //     querystring: {
+    //       date: {
+    //         description: 'Selected Date',
+    //         type: 'Date'
+    //       }
+    //     },
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           user: { 
+    //             type: 'object' 
+    //           },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
 
-    fastify.route({
-      handler: this.addEvent,
-      url: '/schedule/addEvent',
-      method: 'POST',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.addEvent,
+    //   url: '/schedule/addEvent',
+    //   method: 'POST',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
 
-    fastify.route({
-      handler: this.editEvent,
-      url: '/schedule/editEvent',
-      method: 'POST',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.editEvent,
+    //   url: '/schedule/editEvent',
+    //   method: 'POST',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
 
-    fastify.route({
-      handler: this.deleteEvent,
-      url: '/schedule/deleteEvent',
-      method: 'POST',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.deleteEvent,
+    //   url: '/schedule/deleteEvent',
+    //   method: 'POST',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
   }
 
   private async getEvents(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {

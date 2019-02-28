@@ -4,31 +4,31 @@ import { UserService } from '../../libs/User/user-service';
 
 export class UserRouter {
   constructor(fastify: FastifyInstance) {
-    fastify.route({
-      handler: this.getUsers,
-      url: '/user/getUsers',
-      method: 'GET',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.getUsers,
+    //   url: '/user/getUsers',
+    //   method: 'GET',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
 
     fastify.route({
       handler: this.getUser,
@@ -37,157 +37,148 @@ export class UserRouter {
       schema: {
         params: {
           uid: {
-            type: "integer"
+            type: "string"
           }
         },
-        response: {
-          200: {
-            properties: {
-              data: {
-                properties: {
-                  user: { 
-                    additionalProperties: true,
-                    type: "object"
-                  },
-                  type: "object"
-                },
-                type: "object"
-              },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
+        // response: {
+        //   200: {
+        //     properties: {
+        //       data: { additionalParams: true, type: "object" },
+        //       message: { type: "string" },
+        //       statusCode: { type: "integer" }
+        //     },
+        //     type: "object"
+        //   },
+        //   400: {
+        //     properties: {
+        //       data: { type: 'object' },
+        //       message: { type: 'string' },
+        //       statusCode: { type: 'integer' }
+        //     },
+        //     type: 'object'
+        //   }
+        // }
       }
     });
 
-    fastify.route({
-      handler: this.getCaretaker,
-      url: '/user/getCaretaker/:id',
-      method: 'GET',
-      schema: {
-        querystring: {
-          properties: {
-            id: {
-              description: 'Caretaker ID',
-              type: 'number'
-            }
-          },
-          required: ['id'],
-          type: 'object'
-        },
-        response: {
-          200: {
-            properties: {
-              data: {
-                caretaker: {
-                  additionalProperties: true, 
-                  type: 'object' 
-                },
-              },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.getCaretaker,
+    //   url: '/user/getCaretaker/:id',
+    //   method: 'GET',
+    //   schema: {
+    //     querystring: {
+    //       properties: {
+    //         id: {
+    //           description: 'Caretaker ID',
+    //           type: 'integer'
+    //         }
+    //       },
+    //       required: ['id'],
+    //       type: 'object'
+    //     },
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: {
+    //             caretaker: {
+    //               additionalProperties: true, 
+    //               type: 'object' 
+    //             },
+    //           },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
 
-    fastify.route({
-      handler: this.addUser,
-      url: '/user/add',
-      method: 'POST',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.addUser,
+    //   url: '/user/add',
+    //   method: 'POST',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
 
-    fastify.route({
-      handler: this.editUser,
-      url: '/user/edit',
-      method: 'POST',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.editUser,
+    //   url: '/user/edit',
+    //   method: 'POST',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
 
-    fastify.route({
-      handler: this.deleteUser,
-      url: '/user/delete',
-      method: 'POST',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.deleteUser,
+    //   url: '/user/delete',
+    //   method: 'POST',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
   }
 
   private async getUsers(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
@@ -212,7 +203,7 @@ export class UserRouter {
     try {
       const { uid } = request.params;
 
-      const { user } = await new UserService().getUser(uid);
+      const user = await new UserService().getUser(uid);
             
       reply.code(200).send({
         data: { user },

@@ -4,155 +4,155 @@ import { PatientService } from '../../libs/Patient/patient-service';
 
 export class PatientRouter {
   constructor(fastify: FastifyInstance) {
-    fastify.route({
-      handler: this.getPatients,
-      url: '/patient/getPatients/:uid',
-      method: 'GET',
-      schema: {
-        querystring: {
-          properties: {
-            uid: {
-              description: 'User ID',
-              type: 'number'
-            }
-          },
-          required: ['uid'],
-          type: 'object'
-        },
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      },
-    });
+    // fastify.route({
+    //   handler: this.getPatients,
+    //   url: '/patient/getPatients/:uid',
+    //   method: 'GET',
+    //   schema: {
+    //     querystring: {
+    //       properties: {
+    //         uid: {
+    //           description: 'User ID',
+    //           type: 'integer'
+    //         }
+    //       },
+    //       required: ['uid'],
+    //       type: 'object'
+    //     },
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   },
+    // });
 
-    fastify.route({
-      handler: this.getPatient,
-      url: '/patient/getPatient/:id',
-      method: 'GET',
-      schema: {
-        querystring: {
-          properties: {
-            uid: {
-              description: 'Patient ID',
-              type: 'number'
-            }
-          },
-          required: ['id'],
-          type: 'object'
-        },
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      },
-    });
+    // fastify.route({
+    //   handler: this.getPatient,
+    //   url: '/patient/getPatient/:id',
+    //   method: 'GET',
+    //   schema: {
+    //     querystring: {
+    //       properties: {
+    //         uid: {
+    //           description: 'Patient ID',
+    //           type: 'integer'
+    //         }
+    //       },
+    //       required: ['id'],
+    //       type: 'object'
+    //     },
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   },
+    // });
 
-    fastify.route({
-      handler: this.addPatient,
-      url: '/patient/addPatient',
-      method: 'POST',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.addPatient,
+    //   url: '/patient/addPatient',
+    //   method: 'POST',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
 
-    fastify.route({
-      handler: this.editPatient,
-      url: '/patient/editPatient',
-      method: 'POST',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.editPatient,
+    //   url: '/patient/editPatient',
+    //   method: 'POST',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
 
-    fastify.route({
-      handler: this.deletePatient,
-      url: '/patient/deletePatient',
-      method: 'POST',
-      schema: {
-        response: {
-          200: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          },
-          400: {
-            properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
-          }
-        }
-      }
-    });
+    // fastify.route({
+    //   handler: this.deletePatient,
+    //   url: '/patient/deletePatient',
+    //   method: 'POST',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: 'object' },
+    //           message: { type: 'string' },
+    //           statusCode: { type: 'integer' }
+    //         },
+    //         type: 'object'
+    //       }
+    //     }
+    //   }
+    // });
   }
 
   private async getPatients(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {

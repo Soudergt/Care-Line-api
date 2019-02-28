@@ -2,7 +2,7 @@
   "name": "care-line-api",
   "version": "1.0.0",
   "description": "Care line backend",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "compile": "./node_modules/.bin/tsc",
     "compile:dev": "./node_modules/.bin/tsc --watch",
