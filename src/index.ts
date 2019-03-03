@@ -31,19 +31,19 @@ const main = async () => {
     },
   });
 
-  // const redisStore = RedisStore(fastifySession);
+  const redisStore = RedisStore(fastifySession);
 
-  // const sessionOptions: any = {
-  //   cookie: {
-  //     secure: false
-  //   },
-  //   secret: getSessionSecret(),
-  //   store: new redisStore(config.get("redis"))
-  // };
+  const sessionOptions: any = {
+    cookie: {
+      secure: false
+    },
+    secret: getSessionSecret(),
+    store: new redisStore(config.get("redis"))
+  };
 
   fastify.register(fastifyCORS, config.get("cors"));
-  // fastify.register(fastifyCookie);
-  // fastify.register(fastifySession, sessionOptions);
+  fastify.register(fastifyCookie);
+  fastify.register(fastifySession, sessionOptions);
 
   try {
     fastify.after(() => {
