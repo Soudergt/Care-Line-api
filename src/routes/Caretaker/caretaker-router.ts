@@ -23,6 +23,7 @@ export class CaretakerRouter {
       const { id } = request.params;
 
       const caretakers = await new CaretakerService().getCaretakers(id);
+      
 
       reply.code(200).send({
         data: { caretakers },
