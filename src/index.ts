@@ -1,26 +1,49 @@
 import "reflect-metadata";
+
+import * as RedisStore from "connect-redis";
+import * as config from "config";
 import * as Fastify from 'fastify';
 import * as fastifyCORS from 'fastify-cors';
+import * as fastifyCookie from "fastify-cookie";
+import * as fastifySwagger from "fastify-swagger";
+import * as fastifySession from "fastify-session";
+import { getSessionSecret } from "./utils/SessionSecret";
 // import { createConnection } from 'typeorm';
+
 import routes from './routes';
 
 const main = async () => {
-  const fastify = Fastify({
-    logger: true
+  const fastify = Fastify({ 
+    logger: config.get("server.logger")
   });
 
-  const options = {
-    'origin': true,
-    'methods': [
-      'GET',
-      'POST',
-      'PUT',
-      'DELETE',
-      'OPTIONS'
-    ]
-  }
+  fastify.register(fastifySwagger, {
+    exposeRoute: true,
+    swagger: {
+      consumes: ['application/json'],
+      info: {
+        description: 'Documentation for the CareLine API',
+        title: 'CareLine API',
+        version: '0.0.1'
+      },
+      produces: ['application/json'],
+      schemes: ['http'],
+    },
+  });
 
-  fastify.register(fastifyCORS, options);
+  const redisStore = RedisStore(fastifySession);
+
+  const sessionOptions: any = {
+    cookie: {
+      secure: false
+    },
+    secret: getSessionSecret(),
+    store: new redisStore(config.get("redis"))
+  };
+
+  fastify.register(fastifyCORS, config.get("cors"));
+  fastify.register(fastifyCookie);
+  fastify.register(fastifySession, sessionOptions);
 
   try {
     fastify.after(() => {
