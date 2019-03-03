@@ -4,41 +4,18 @@ import { PatientService } from '../../libs/Patient/patient-service';
 
 export class PatientRouter {
   constructor(fastify: FastifyInstance) {
-    // fastify.route({
-    //   handler: this.getPatients,
-    //   url: '/patient/getPatients/:uid',
-    //   method: 'GET',
-    //   schema: {
-    //     querystring: {
-    //       properties: {
-    //         uid: {
-    //           description: 'User ID',
-    //           type: 'integer'
-    //         }
-    //       },
-    //       required: ['uid'],
-    //       type: 'object'
-    //     },
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   },
-    // });
+    fastify.route({
+      handler: this.getPatients,
+      url: '/patient/getPatients/:uid',
+      method: 'GET',
+      schema: {
+        params: {
+          uid: {
+            type: "string"
+          }
+        }
+      }
+    });
 
     // fastify.route({
     //   handler: this.getPatient,
@@ -157,23 +134,22 @@ export class PatientRouter {
 
   private async getPatients(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
     try {
-      const { uid } = request.query;
+      const { uid } = request.params;
 
       const patients = await new PatientService().getPatients(uid);
-
+            
       reply.code(200).send({
-        data: { patients: patients },
+        data: { patients },
         message: 'SUCCESS',
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        data: {},
         message: 'ERROR',
         statusCode: 400
       });
     }
-  };
+  }
 
   private async getPatient(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
     try {

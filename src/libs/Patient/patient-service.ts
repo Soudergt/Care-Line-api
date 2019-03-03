@@ -1,8 +1,131 @@
 export class PatientService {
-  public async getPatients(params: {uid: string}) {
-    return {
-      name: 'Betty'
-    };
+  public getPatients(uid: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const PATIENTS: any[] = [
+        {
+          id: 1,
+          fn: 'Cathy',
+          mi: '',
+          ln: '',
+          clinic: 'Careline Clinic',
+          bday: 'May, 5, 1942',
+          gender: 'male',
+          bloodtype: 'O+',
+          height: "6'0''",
+          weight: '160 lbs',
+          img: 'url(/assets/images/people/patients/cathy.jpg)',
+          emergency: {
+            fn: 'Lauren',
+            ln: 'James',
+            address: '127 Oak Lane, Cincinnati, Ohio, 44221',
+            phone: '111-111-1111',
+            email: 'lauren.james@email.com'
+          }
+        },
+        {
+          id: 2,
+          fn: 'Bobby',
+          mi: '',
+          ln: '',
+          clinic: 'Careline Clinic',
+          bday: 'May, 5, 1942',
+          gender: 'male',
+          bloodtype: 'O+',
+          height: "6'0''",
+          weight: '160 lbs',
+          img: 'url(/assets/images/people/patients/bobby.jpg)',
+          emergency: {
+            fn: 'Lauren',
+            ln: 'James',
+            address: '127 Oak Lane, Cincinnati, Ohio, 44221',
+            phone: '111-111-1111',
+            email: 'lauren.james@email.com'
+          }
+        },
+        {
+          id: 3,
+          fn: 'Tammy',
+          mi: '',
+          ln: '',
+          clinic: 'Careline Clinic',
+          bday: 'May, 5, 1942',
+          gender: 'male',
+          bloodtype: 'O+',
+          height: "6'0''",
+          weight: '160 lbs',
+          img: 'url(/assets/images/people/patients/brenda.jpg)',
+          emergency: {
+            fn: 'Lauren',
+            ln: 'James',
+            address: '127 Oak Lane, Cincinnati, Ohio, 44221',
+            phone: '111-111-1111',
+            email: 'lauren.james@email.com'
+          }
+        },
+        {
+          id: 4,
+          fn: 'Frank',
+          mi: '',
+          ln: '',
+          clinic: 'Careline Clinic',
+          bday: 'May, 5, 1942',
+          gender: 'male',
+          bloodtype: 'O+',
+          height: "6'0''",
+          weight: '160 lbs',
+          img: 'url(/assets/images/people/patients/frank.jpg)',
+          emergency: {
+            fn: 'Lauren',
+            ln: 'James',
+            address: '127 Oak Lane, Cincinnati, Ohio, 44221',
+            phone: '111-111-1111',
+            email: 'lauren.james@email.com'
+          }
+        },
+        {
+          id: 5,
+          fn: 'George',
+          mi: '',
+          ln: '',
+          clinic: 'Careline Clinic',
+          bday: 'May, 5, 1942',
+          gender: 'male',
+          bloodtype: 'O+',
+          height: "6'0''",
+          weight: '160 lbs',
+          img: 'url(/assets/images/people/patients/george.jpg)',
+          emergency: {
+            fn: 'Lauren',
+            ln: 'James',
+            address: '127 Oak Lane, Cincinnati, Ohio, 44221',
+            phone: '111-111-1111',
+            email: 'lauren.james@email.com'
+          }
+        },
+        {
+          id: 6,
+          fn: 'Duke',
+          mi: 'M',
+          ln: 'James',
+          clinic: 'Careline Clinic',
+          bday: 'May, 5, 1942',
+          gender: 'male',
+          bloodtype: 'O+',
+          height: "6'0''",
+          weight: '160 lbs',
+          img: 'url(/assets/images/people/patients/duke.jpg)',
+          emergency: {
+            fn: 'Lauren',
+            ln: 'James',
+            address: '127 Oak Lane, Cincinnati, Ohio, 44221',
+            phone: '111-111-1111',
+            email: 'lauren.james@email.com'
+          }
+        }
+      ];
+  
+      resolve(PATIENTS);
+    });
   }
 
   public getPatient(params: {id: number}) {
