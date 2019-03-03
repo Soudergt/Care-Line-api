@@ -39,25 +39,7 @@ export class UserRouter {
           uid: {
             type: "string"
           }
-        },
-        // response: {
-        //   200: {
-        //     properties: {
-        //       data: { additionalParams: true, type: "object" },
-        //       message: { type: "string" },
-        //       statusCode: { type: "integer" }
-        //     },
-        //     type: "object"
-        //   },
-        //   400: {
-        //     properties: {
-        //       data: { type: 'object' },
-        //       message: { type: 'string' },
-        //       statusCode: { type: 'integer' }
-        //     },
-        //     type: 'object'
-        //   }
-        // }
+        }
       }
     });
 
