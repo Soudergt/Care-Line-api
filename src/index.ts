@@ -31,29 +31,35 @@ const main = async () => {
     },
   });
 
-  const redisStore = RedisStore(fastifySession);
+  // const redisStore = RedisStore(fastifySession);
 
-  const sessionOptions: any = {
-    cookie: {
-      secure: false
-    },
-    secret: getSessionSecret(),
-    store: new redisStore(config.get("redis"))
-  };
+  // const sessionOptions: any = {
+  //   cookie: {
+  //     secure: false
+  //   },
+  //   secret: getSessionSecret(),
+  //   store: new redisStore(config.get("redis"))
+  // };
 
   fastify.register(fastifyCORS, config.get("cors"));
-  fastify.register(fastifyCookie);
-  fastify.register(fastifySession, sessionOptions);
+  // fastify.register(fastifyCookie);
+  // fastify.register(fastifySession, sessionOptions);
 
   try {
     fastify.after(() => {
       routes.forEach(Route => new Route(fastify));
     });
     
-    fastify.listen(3000, err => {
+    fastify.listen(config.get("server.port"), "0.0.0.0", (err?: Error) => {
       if (err) {
         fastify.log.error(err);
+
+        return process.exit(1);
       }
+
+      fastify.log.info(
+        `Server is listening on port ${config.get("server.port")}`
+      );
     });
   } catch (err) {
     fastify.log.info('Failed to start server');
