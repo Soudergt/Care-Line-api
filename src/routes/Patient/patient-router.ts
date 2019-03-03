@@ -17,41 +17,18 @@ export class PatientRouter {
       }
     });
 
-    // fastify.route({
-    //   handler: this.getPatient,
-    //   url: '/patient/getPatient/:id',
-    //   method: 'GET',
-    //   schema: {
-    //     querystring: {
-    //       properties: {
-    //         uid: {
-    //           description: 'Patient ID',
-    //           type: 'integer'
-    //         }
-    //       },
-    //       required: ['id'],
-    //       type: 'object'
-    //     },
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   },
-    // });
+    fastify.route({
+      handler: this.getPatient,
+      url: '/patient/:id',
+      method: 'GET',
+      schema: {
+        params: {
+          id: {
+            type: "string"
+          }
+        }
+      }
+    });
 
     // fastify.route({
     //   handler: this.addPatient,
@@ -153,12 +130,12 @@ export class PatientRouter {
 
   private async getPatient(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
     try {
-      const { id } = request.query;
+      const { id } = request.params;
 
       const patient = await new PatientService().getPatient(id);
 
       reply.code(200).send({
-        data: { patient: patient },
+        data: { patient },
         message: 'SUCCESS',
         statusCode: 200
       });
