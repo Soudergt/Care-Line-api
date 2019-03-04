@@ -10,15 +10,7 @@
   "entities": [
     "server/entities/**/*.ts"
   ],
-  "migrations": [
-    "server/migrations/**/*.ts"
-  ],
-  "subscribers": [
-    "server/subscribers/**/*.ts"
-  ],
   "cli": {
-    "entitiesDir": "src/entities",
-    "migrationsDir": "src/migrations",
-    "subscribersDir": "src/subscribers"
+    "entitiesDir": "src/entities"
   }
 }
