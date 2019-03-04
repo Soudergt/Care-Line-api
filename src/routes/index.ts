@@ -5,6 +5,7 @@ import { NoteRouter } from './Note/note-router';
 import { AuthRouter } from './Auth/auth-router';
 import { CaretakerRouter } from './Caretaker/caretaker-router';
 import { ClinicRouter } from './Clinic/clinic-router';
+import { FeedbackRouter } from './Feedback/feedback-router';
 
 export default [
   PatientRouter,
@@ -13,5 +14,6 @@ export default [
   NoteRouter,
   AuthRouter,
   CaretakerRouter,
-  ClinicRouter
+  ClinicRouter,
+  FeedbackRouter
 ];
