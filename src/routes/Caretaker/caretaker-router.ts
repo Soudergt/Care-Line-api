@@ -1,6 +1,7 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { IncomingMessage, ServerResponse } from 'http';
+import { FastifyInstance } from 'fastify';
 import { CaretakerService } from '../../libs/Caretaker/caretaker-service';
+import { Request } from "../../interfaces/Request";
+import { Response } from "../../interfaces/Response";
 
 export class CaretakerRouter {
   constructor(fastify: FastifyInstance) {
@@ -18,7 +19,7 @@ export class CaretakerRouter {
     });
   }
 
-  private async getCaretakers(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async getCaretakers(request: Request, reply: Response) {
     try {
       const { id } = request.params;
 

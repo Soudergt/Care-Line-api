@@ -1,5 +1,6 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { IncomingMessage, ServerResponse } from 'http';
+import { FastifyInstance } from 'fastify';
+import { Request } from "../../interfaces/Request";
+import { Response } from "../../interfaces/Response";
 import { UserService } from '../../libs/User/user-service';
 
 export class UserRouter {
@@ -163,7 +164,7 @@ export class UserRouter {
     // });
   }
 
-  private async getUsers(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async getUsers(request: Request, reply: Response) {
     try {
       const users = await new UserService().getUsers();
 
@@ -181,7 +182,7 @@ export class UserRouter {
     }
   }
 
-  private async getUser(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async getUser(request: Request, reply: Response) {
     try {
       const { uid } = request.params;
 
@@ -200,7 +201,7 @@ export class UserRouter {
     }
   }
 
-  private async getCaretaker(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async getCaretaker(request: Request, reply: Response) {
     try {
       const { id } = request.query;
 
@@ -220,7 +221,7 @@ export class UserRouter {
     }
   }
 
-  private async addUser(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async addUser(request: Request, reply: Response) {
     try {
       const { newUser } = request.query;
 
@@ -239,7 +240,7 @@ export class UserRouter {
     }
   }
 
-  private async editUser(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async editUser(request: Request, reply: Response) {
     try {
       const { selectedUser } = request.query;
 
@@ -258,7 +259,7 @@ export class UserRouter {
     }
   }
 
-  private async deleteUser(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async deleteUser(request: Request, reply: Response) {
     try {
       const { userID } = request.query;
 

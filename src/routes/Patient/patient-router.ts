@@ -1,5 +1,6 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { IncomingMessage, ServerResponse } from 'http';
+import { FastifyInstance } from 'fastify';
+import { Request } from "../../interfaces/Request";
+import { Response } from "../../interfaces/Response";
 import { PatientService } from '../../libs/Patient/patient-service';
 
 export class PatientRouter {
@@ -109,7 +110,7 @@ export class PatientRouter {
     // });
   }
 
-  private async getPatients(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async getPatients(request: Request, reply: Response) {
     try {
       const { uid } = request.params;
 
@@ -128,7 +129,7 @@ export class PatientRouter {
     }
   }
 
-  private async getPatient(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async getPatient(request: Request, reply: Response) {
     try {
       const { id } = request.params;
 
@@ -148,7 +149,7 @@ export class PatientRouter {
     }
   }
 
-  private async addPatient(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async addPatient(request: Request, reply: Response) {
     try {
       const { newPatient } = request.query;
 
@@ -168,7 +169,7 @@ export class PatientRouter {
     }
   }
 
-  private async editPatient(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async editPatient(request: Request, reply: Response) {
     try {
       const { selectedPatient } = request.query;
 
@@ -188,7 +189,7 @@ export class PatientRouter {
     }
   }
 
-  private async deletePatient(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async deletePatient(request: Request, reply: Response) {
     try {
       const { patientID } = request.query;
 

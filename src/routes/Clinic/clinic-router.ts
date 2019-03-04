@@ -1,5 +1,6 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { IncomingMessage, ServerResponse } from 'http';
+import { FastifyInstance } from 'fastify';
+import { Request } from "../../interfaces/Request";
+import { Response } from "../../interfaces/Response";
 import { ClinicService } from '../../libs/Clinic/clinic-service';
 
 export class ClinicRouter {
@@ -18,7 +19,7 @@ export class ClinicRouter {
     });
   }
 
-  private async getClinic(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async getClinic(request: Request, reply: Response) {
     try {
       const { id } = request.params;
 

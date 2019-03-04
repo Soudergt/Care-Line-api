@@ -1,5 +1,6 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { IncomingMessage, ServerResponse } from 'http';
+import { FastifyInstance } from 'fastify';
+import { Request } from "../../interfaces/Request";
+import { Response } from "../../interfaces/Response";
 import { ScheduleService } from '../../libs/Schedule/schedule-service';
 
 export class ScheduleRouter {
@@ -117,7 +118,7 @@ export class ScheduleRouter {
     // });
   }
 
-  private async getEvents(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async getEvents(request: Request, reply: Response) {
     try {
       const { selectedDate } = request.query;
 
@@ -137,7 +138,7 @@ export class ScheduleRouter {
     }
   }
 
-  private async addEvent(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async addEvent(request: Request, reply: Response) {
     try {
       const { newEvent } = request.query;
 
@@ -157,7 +158,7 @@ export class ScheduleRouter {
     }
   }
 
-  private async editEvent(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async editEvent(request: Request, reply: Response) {
     try {
       const { selectedEvent } = request.query;
 
@@ -177,7 +178,7 @@ export class ScheduleRouter {
     }
   }
 
-  private async deleteEvent(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async deleteEvent(request: Request, reply: Response) {
     try {
       const { eventID } = request.query;
 

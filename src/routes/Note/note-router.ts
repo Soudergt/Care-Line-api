@@ -1,5 +1,6 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { IncomingMessage, ServerResponse } from 'http';
+import { FastifyInstance } from 'fastify';
+import { Request } from "../../interfaces/Request";
+import { Response } from "../../interfaces/Response";
 import { NoteService } from '../../libs/Note/note-service';
 
 export class NoteRouter {
@@ -119,7 +120,7 @@ export class NoteRouter {
     // });
   }
 
-  private async getNotes(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async getNotes(request: Request, reply: Response) {
     try {
       const { selectedDate } = request.query;
 
@@ -139,7 +140,7 @@ export class NoteRouter {
     }
   };
 
-  private async addNote(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async addNote(request: Request, reply: Response) {
     try {
       const { newNote } = request.query;
 
@@ -159,7 +160,7 @@ export class NoteRouter {
     }
   };
 
-  private async editNote(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async editNote(request: Request, reply: Response) {
     try {
       const { selectedNote } = request.query;
 
@@ -179,7 +180,7 @@ export class NoteRouter {
     }
   };
 
-  private async deleteNote(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async deleteNote(request: Request, reply: Response) {
     try {
       const { noteID } = request.query;
 

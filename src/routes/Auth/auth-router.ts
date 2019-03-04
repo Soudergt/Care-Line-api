@@ -1,5 +1,6 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { IncomingMessage, ServerResponse } from 'http';
+import { FastifyInstance} from 'fastify';
+import { Request } from "../../interfaces/Request";
+import { Response } from "../../interfaces/Response";
 import { AuthService } from '../../libs/Auth/auth-service';
 
 export class AuthRouter {
@@ -57,7 +58,7 @@ export class AuthRouter {
     // });
   }
 
-  private async login(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async login(request: Request, reply: Response) {
     try {
       const { info } = request.query;
 
@@ -77,7 +78,7 @@ export class AuthRouter {
     }
   }
 
-  private async logout(request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  private async logout(request: Request, reply: Response) {
     try {
       const logout = await new AuthService().logout();
       
