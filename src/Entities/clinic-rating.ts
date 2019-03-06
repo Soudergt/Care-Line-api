@@ -20,5 +20,4 @@ export class ClinicRating {
 
     @Column()
     FKRatedByUser: number;
-
 }
