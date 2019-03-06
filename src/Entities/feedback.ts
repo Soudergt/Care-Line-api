@@ -4,6 +4,24 @@ import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
 export class Feedback {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    FeedbackID: number;
+
+    @Column()
+    FKPatientID: number;
+
+    @Column("text")
+    GeneralFeedback: string;
+
+    @Column("text")
+    TreatmentOptions: string;
+
+    @Column("text")
+    CareAdvise: string;
+
+    @Column()
+    TimeUpdated: Date;
+
+    @Column()
+    FKUpdatedByUser: number;
 
 }
