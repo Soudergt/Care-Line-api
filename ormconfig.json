@@ -1,4 +1,5 @@
 {
+  "name": "default",
   "type": "mssql",
   "host": "69.55.55.228",
   "port": 1433,
@@ -11,6 +12,6 @@
     "server/entities/**/*.ts"
   ],
   "cli": {
-    "entitiesDir": "src/entities"
+    "entitiesDir": "src/Entities"
   }
 }
