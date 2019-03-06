@@ -33,13 +33,13 @@ export class User {
     @Column()
     HomeAddress: string;
 
-    @Column()
+    @Column("bigint")
     WorkPhone: number;
 
-    @Column()
+    @Column("bigint")
     MobilePhone: number;
 
-    @Column()
+    @Column("bigint")
     HomePhone: number;
 
     @Column()
@@ -48,7 +48,7 @@ export class User {
     @Column()
     FeaturesEnabled: boolean;
 
-    @Column()
+    @Column("text")
     UserPhoto: string;
 
     @Column()
@@ -60,10 +60,10 @@ export class User {
     @Column()
     BloodType: string;
 
-    @Column()
+    @Column("text")
     AllergyInfo: string;
 
-    @Column()
+    @Column("text")
     DietInfo: string;
 
 }

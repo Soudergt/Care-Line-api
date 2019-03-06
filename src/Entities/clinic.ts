@@ -15,18 +15,18 @@ export class Clinic {
     @Column()
     ClinicAddress: string;
 
-    @Column()
+    @Column("bigint")
     ClinicPhone: number;
 
     @Column()
     ClinicEmail: string;
 
-    @Column()
+    @Column("text")
     ClinicDescription: string;
 
-    @Column()
+    @Column("text")
     ClinicType: string;
 
-    @Column()
+    @Column("text")
     ClinicPhoto: string;
 }
