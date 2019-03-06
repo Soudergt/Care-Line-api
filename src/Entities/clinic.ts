@@ -4,6 +4,29 @@ import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
 export class Clinic {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    ClinicID: number;
 
+    @Column()
+    ClinicLongName: string;
+
+    @Column()
+    ClinicShortName: string;
+
+    @Column()
+    ClinicAddress: string;
+
+    @Column()
+    ClinicPhone: number;
+
+    @Column()
+    ClinicEmail: string;
+
+    @Column()
+    ClinicDescription: string;
+
+    @Column()
+    ClinicType: string;
+
+    @Column()
+    ClinicPhoto: string;
 }
