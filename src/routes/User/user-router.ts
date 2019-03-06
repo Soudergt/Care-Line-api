@@ -38,7 +38,7 @@ export class UserRouter {
       schema: {
         params: {
           uid: {
-            type: "string"
+            type: "number"
           }
         }
       }
@@ -186,7 +186,7 @@ export class UserRouter {
     try {
       const { uid } = request.params;
 
-      const user = await new UserService().getUser(uid);
+      const user = await new UserService().getUserV2(uid);
             
       reply.code(200).send({
         data: { user },

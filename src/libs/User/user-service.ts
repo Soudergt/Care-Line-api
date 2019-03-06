@@ -1,7 +1,10 @@
-// import { getManager } from "typeorm";
-// import { User } from "../../entities/user";
+import { getRepository } from "typeorm";
+import { User } from "../../Entities/user";
+
+const userRepository = getRepository(User);
 
 export class UserService {
+
   public async getUsers() {
     // const userRepository = getManager().getRepository(User);
 
@@ -21,6 +24,11 @@ export class UserService {
       };
       resolve(user);
     });
+  }
+
+  public async getUserV2(uid: number): Promise<any> {
+    // let user = await userRepository.findOne(uid);
+    // return user;
   }
 
   public getCaretaker(params: {id: number}) {
