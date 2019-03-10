@@ -5,9 +5,9 @@
   "port": 1433,
   "username": "CareLine",
   "password": "GoCubb1es!",
-  "database": "CareLine_Dev1",
+  "database": "CareLine_Dev2",
   "synchronize": true,
-  "logging": true,
+  "logging": false,
   "entities": [
     "build/Entities/**/*.js"
   ],
