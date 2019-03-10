@@ -8,15 +8,11 @@ import * as fastifyCookie from "fastify-cookie";
 import * as fastifySwagger from "fastify-swagger";
 import * as fastifySession from "fastify-session";
 import { getSessionSecret } from "./utils/SessionSecret";
-import { createConnection } from 'typeorm';
+import { fastifyorm } from "./utils/FastifyTypeorm";
 
 import routes from './routes';
 
 const main = async () => {
-  const typeormConfig = {
-    instance: 'db'
-  };
-  
   const fastify = Fastify({
     logger: config.get("server.logger")
   });
@@ -48,6 +44,7 @@ const main = async () => {
   fastify.register(fastifyCORS, config.get("cors"));
   fastify.register(fastifyCookie);
   fastify.register(fastifySession, sessionOptions);
+  fastify.register(fastifyorm).ready();
 
   try {
     fastify.after(() => {
@@ -61,9 +58,7 @@ const main = async () => {
         return process.exit(1);
       }
 
-      fastify.log.info(
-        `Server is listening on port ${config.get("server.port")}`
-      );
+      fastify.log.info(`Server is listening on port ${config.get("server.port")}`);
     });
   } catch (err) {
     fastify.log.info('Failed to start server');
