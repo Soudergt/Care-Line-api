@@ -10,28 +10,28 @@ export class UserRouter {
       url: '/user/getUsers',
       method: 'GET',
       schema: {
-        response: {
-          200: {
-            type: "object",
-            properties: {
-              data: {
-                additionalProperties: true,
-                users: {
-                  type: "array"
-                },
-                type: "object"
-              }
-            }
-          },
-          400: {
-            properties: {
-              data: { type: "object" },
-              message: { type: "string" },
-              statusCode: { type: "integer" }
-            },
-            type: "object"
-          }
-        }
+        // response: {
+        //   200: {
+        //     type: "object",
+        //     properties: {
+        //       data: {
+        //         additionalProperties: true,
+        //         users: {
+        //           type: "array"
+        //         },
+        //         type: "object"
+        //       }
+        //     }
+        //   },
+        //   400: {
+        //     properties: {
+        //       data: { type: "object" },
+        //       message: { type: "string" },
+        //       statusCode: { type: "integer" }
+        //     },
+        //     type: "object"
+        //   }
+        // }
       }
     });
 
@@ -45,28 +45,28 @@ export class UserRouter {
             type: "string"
           }
         },
-        response: {
-          200: {
-            type: "object",
-            properties: {
-              data: {
-                additionalProperties: true,
-                user: {
-                  type: "object"
-                },
-                type: "object"
-              }
-            }
-          },
-          400: {
-            properties: {
-              data: { type: "object" },
-              message: { type: "string" },
-              statusCode: { type: "integer" }
-            },
-            type: "object"
-          }
-        }
+        // response: {
+        //   200: {
+        //     type: "object",
+        //     properties: {
+        //       data: {
+        //         additionalProperties: true,
+        //         user: {
+        //           type: "object"
+        //         },
+        //         type: "object"
+        //       }
+        //     }
+        //   },
+        //   400: {
+        //     properties: {
+        //       data: { type: "object" },
+        //       message: { type: "string" },
+        //       statusCode: { type: "integer" }
+        //     },
+        //     type: "object"
+        //   }
+        // }
       }
     });
 
@@ -75,28 +75,28 @@ export class UserRouter {
       url: '/user/add',
       method: 'POST',
       schema: {
-        response: {
-          200: {
-            type: "object",
-            properties: {
-              data: {
-                additionalProperties: true,
-                user: {
-                  type: "object"
-                },
-                type: "object"
-              }
-            }
-          },
-          400: {
-            properties: {
-              data: { type: "object" },
-              message: { type: "string" },
-              statusCode: { type: "integer" }
-            },
-            type: "object"
-          }
-        }
+        // response: {
+        //   200: {
+        //     type: "object",
+        //     properties: {
+        //       data: {
+        //         additionalProperties: true,
+        //         user: {
+        //           type: "object"
+        //         },
+        //         type: "object"
+        //       }
+        //     }
+        //   },
+        //   400: {
+        //     properties: {
+        //       data: { type: "object" },
+        //       message: { type: "string" },
+        //       statusCode: { type: "integer" }
+        //     },
+        //     type: "object"
+        //   }
+        // }
       }
     });
 
@@ -199,9 +199,9 @@ export class UserRouter {
 
   private async addUser(request: Request, reply: Response) {
     try {
-      const { newUser } = request.query;
+      // const { newUser } = request.query;
 
-      const user = await new UserService().addUser(newUser);
+      const user = await new UserService().addUser();
       
       reply.code(200).send({
         data: { user },

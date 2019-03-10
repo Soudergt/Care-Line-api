@@ -1,12 +1,12 @@
-import { getConnection, getRepository } from "typeorm";
+import { getManager } from "typeorm";
 import { User } from "../../Entities/user";
 
 export class UserService {
 
   public async getUsers() {
-    const userRepository = getConnection().getRepository(User);
+    const entityManager = getManager();
 
-    const users = await userRepository.find();
+    const users = await entityManager.find(User);    
 
     return users;
   }
@@ -25,13 +25,34 @@ export class UserService {
   }
 
   public async getUserV2(uid: string): Promise<any> {
-    const userRepository = getConnection().getRepository(User);
-    let user = await userRepository.findOne(uid);
-    return user;
+    try {
+      const entityManager = getManager();
+      const user = await entityManager.find(User);
+
+      return user;
+    } catch(err) {
+      console.log(err);
+      
+    }
   }
 
-  public async addUser(data: any) {
-    
+  public async addUser() {
+    const entityManager = getManager();
+
+    const user = {
+      UserType: 'caretaker',
+      UserEmail: 'twilliams@carelinetechnology.com',
+      Password: 'password',
+      NameFirst: 'Taylor',
+      NameLast: 'Williams',
+      MobilePhone: 6144997984,
+      DateOfBirth: new Date(),
+      FeaturesEnabled: true,
+      ActivationDate: new Date()
+    }
+    // const newUser = entityManager.create(User);
+    const newUser = await entityManager.create(User, user);
+    return newUser;
   }
 
   public async editUser(data: any) {
