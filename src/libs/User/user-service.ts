@@ -1,16 +1,14 @@
-import { getRepository } from "typeorm";
+import { getConnection, getRepository } from "typeorm";
 import { User } from "../../Entities/user";
-
-const userRepository = getRepository(User);
 
 export class UserService {
 
   public async getUsers() {
-    // const userRepository = getManager().getRepository(User);
+    const userRepository = getConnection().getRepository(User);
 
-    // const users = await userRepository.find();
+    const users = await userRepository.find();
 
-    // return users;
+    return users;
   }
 
   public getUser(uid: string): Promise<any> {
@@ -26,19 +24,10 @@ export class UserService {
     });
   }
 
-  public async getUserV2(uid: number): Promise<any> {
-    // let user = await userRepository.findOne(uid);
-    // return user;
-  }
-
-  public getCaretaker(params: {id: number}) {
-    return {
-      id: 10,
-      fn: 'Taylor',
-      ln: 'Williams',
-      clinic: 'Careline Clinic',
-      img: "url('/assets/images/people/caretakers/taylorwilliams.jpg')"
-    }
+  public async getUserV2(uid: string): Promise<any> {
+    const userRepository = getConnection().getRepository(User);
+    let user = await userRepository.findOne(uid);
+    return user;
   }
 
   public async addUser(data: any) {
