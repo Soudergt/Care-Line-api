@@ -30,7 +30,6 @@
     "fastify-plugin": "^1.5.0",
     "fastify-session": "^2.0.0",
     "fastify-swagger": "^2.3.1",
-    "fastify-typeorm": "^1.0.0",
     "mssql": "^4.3.2",
     "pino": "^5.11.1",
     "reflect-metadata": "^0.1.10",
