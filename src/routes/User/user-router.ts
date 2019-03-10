@@ -5,163 +5,160 @@ import { UserService } from '../../libs/User/user-service';
 
 export class UserRouter {
   constructor(fastify: FastifyInstance) {
-    // fastify.route({
-    //   handler: this.getUsers,
-    //   url: '/user/getUsers',
-    //   method: 'GET',
-    //   schema: {
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   }
-    // });
-
     fastify.route({
-      handler: this.getUser,
-      url: '/user/:uid',
+      handler: this.getUsers,
+      url: '/user/getUsers',
       method: 'GET',
       schema: {
-        params: {
-          uid: {
-            type: "number"
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                users: {
+                  type: "array"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
           }
         }
       }
     });
 
-    // fastify.route({
-    //   handler: this.getCaretaker,
-    //   url: '/user/getCaretaker/:id',
-    //   method: 'GET',
-    //   schema: {
-    //     querystring: {
-    //       properties: {
-    //         id: {
-    //           description: 'Caretaker ID',
-    //           type: 'integer'
-    //         }
-    //       },
-    //       required: ['id'],
-    //       type: 'object'
-    //     },
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: {
-    //             caretaker: {
-    //               additionalProperties: true, 
-    //               type: 'object' 
-    //             },
-    //           },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   }
-    // });
+    fastify.route({
+      handler: this.getUser,
+      url: "/user/:uid",
+      method: "GET",
+      schema: {
+        params: {
+          uid: {
+            type: "string"
+          }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                user: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
 
-    // fastify.route({
-    //   handler: this.addUser,
-    //   url: '/user/add',
-    //   method: 'POST',
-    //   schema: {
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   }
-    // });
+    fastify.route({
+      handler: this.addUser,
+      url: '/user/add',
+      method: 'POST',
+      schema: {
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                user: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
 
-    // fastify.route({
-    //   handler: this.editUser,
-    //   url: '/user/edit',
-    //   method: 'POST',
-    //   schema: {
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   }
-    // });
+    fastify.route({
+      handler: this.editUser,
+      url: '/user/edit',
+      method: 'POST',
+      schema: {
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                user: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
 
-    // fastify.route({
-    //   handler: this.deleteUser,
-    //   url: '/user/delete',
-    //   method: 'POST',
-    //   schema: {
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   }
-    // });
+    fastify.route({
+      handler: this.deleteUser,
+      url: '/user/delete',
+      method: 'POST',
+      schema: {
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                user: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
   }
 
   private async getUsers(request: Request, reply: Response) {
@@ -169,14 +166,13 @@ export class UserRouter {
       const users = await new UserService().getUsers();
 
       reply.code(200).send({
-        data: { users: users },
-        message: 'SUCCESS',
+        data: { users },
+        message: "Successfully got users",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        data: {},
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }
@@ -190,32 +186,12 @@ export class UserRouter {
             
       reply.code(200).send({
         data: { user },
-        message: 'SUCCESS',
+        message: "Successfully got user",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        message: 'ERROR',
-        statusCode: 400
-      });
-    }
-  }
-
-  private async getCaretaker(request: Request, reply: Response) {
-    try {
-      const { id } = request.query;
-
-      const caretaker = await new UserService().getCaretaker(id);
-      request.log.info('user: ' + caretaker);
-            
-      reply.code(200).send({
-        data: { caretaker },
-        message: 'SUCCESS',
-        statusCode: 200
-      });
-    } catch (error) {
-      reply.code(400).send({
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }
@@ -228,13 +204,13 @@ export class UserRouter {
       const user = await new UserService().addUser(newUser);
       
       reply.code(200).send({
-        data: { user: user },
-        message: 'SUCCESS',
+        data: { user },
+        message: "Successfully created user",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }
@@ -247,13 +223,13 @@ export class UserRouter {
       const user = await new UserService().editUser(selectedUser);
       
       reply.code(200).send({
-        data: { user: user },
-        message: 'SUCCESS',
+        data: { user },
+        message: "Successfully edited user",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }
@@ -266,13 +242,13 @@ export class UserRouter {
       const user = await new UserService().deleteUser(userID);
       
       reply.code(200).send({
-        data: { user: user },
-        message: 'SUCCESS',
+        data: { user },
+        message: "Successfully deleted user",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }

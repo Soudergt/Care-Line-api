@@ -7,12 +7,34 @@ export class PatientRouter {
   constructor(fastify: FastifyInstance) {
     fastify.route({
       handler: this.getPatients,
-      url: '/patient/getPatients/:uid',
-      method: 'GET',
+      url: "/patient/getPatients/:uid",
+      method: "GET",
       schema: {
         params: {
           uid: {
             type: "string"
+          }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                patients: {
+                  type: "array"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
           }
         }
       }
@@ -20,94 +42,38 @@ export class PatientRouter {
 
     fastify.route({
       handler: this.getPatient,
-      url: '/patient/:id',
-      method: 'GET',
+      url: "/patient/:id",
+      method: "GET",
       schema: {
         params: {
           id: {
             type: "string"
           }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                patient: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
         }
       }
     });
-
-    // fastify.route({
-    //   handler: this.addPatient,
-    //   url: '/patient/addPatient',
-    //   method: 'POST',
-    //   schema: {
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   }
-    // });
-
-    // fastify.route({
-    //   handler: this.editPatient,
-    //   url: '/patient/editPatient',
-    //   method: 'POST',
-    //   schema: {
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   }
-    // });
-
-    // fastify.route({
-    //   handler: this.deletePatient,
-    //   url: '/patient/deletePatient',
-    //   method: 'POST',
-    //   schema: {
-    //     response: {
-    //       200: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: 'object' },
-    //           message: { type: 'string' },
-    //           statusCode: { type: 'integer' }
-    //         },
-    //         type: 'object'
-    //       }
-    //     }
-    //   }
-    // });
   }
 
   private async getPatients(request: Request, reply: Response) {
@@ -118,12 +84,12 @@ export class PatientRouter {
             
       reply.code(200).send({
         data: { patients },
-        message: 'SUCCESS',
+        message: "Successfully got patients",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }
@@ -137,13 +103,12 @@ export class PatientRouter {
 
       reply.code(200).send({
         data: { patient },
-        message: 'SUCCESS',
+        message: "Successfully got patient",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        data: {},
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }
@@ -156,14 +121,13 @@ export class PatientRouter {
       const patient = await new PatientService().addPatient(newPatient);
       
       reply.code(200).send({
-        data: { patient: patient },
-        message: 'SUCCESS',
+        data: { patient },
+        message: "Successfully added patient",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        data: {},
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }
@@ -176,14 +140,13 @@ export class PatientRouter {
       const patient = await new PatientService().editPatient(selectedPatient);
       
       reply.code(200).send({
-        data: { patient: patient },
-        message: 'SUCCESS',
+        data: { patient },
+        message: "Successfully editted patient",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        data: {},
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }
@@ -196,14 +159,13 @@ export class PatientRouter {
       const patient = await new PatientService().deletePatient(patientID);
       
       reply.code(200).send({
-        data: { patient: patient },
-        message: 'SUCCESS',
+        data: { patient },
+        message: "Successfully deleted patient.",
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        data: {},
-        message: 'ERROR',
+        message: error,
         statusCode: 400
       });
     }
