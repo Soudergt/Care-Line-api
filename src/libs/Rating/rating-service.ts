@@ -1,14 +1,28 @@
 import { getRepository } from "typeorm";
-import { Clinic } from "../../Entities/clinic";
+import { ClinicRating } from "../../Entities/clinic-rating";
+import { CaretakerRating } from "../../Entities/caretaker-rating";
 
 export class RatingService {
-  public async getRating(id: number) {
+  public async getClinicRating(id: number) {
     try {
-      const clinicRepo = getRepository(Clinic);
+      const clinicRatingRepo = getRepository(ClinicRating);
 
-      const clinic = await clinicRepo.findOne(id);    
+      const rating = await clinicRatingRepo.findOne(id);    
   
-      return clinic;
+      return rating;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  public async getCaretakerRating(id: number) {
+    try {
+      const caretakerRatingRepo = getRepository(CaretakerRating);
+
+      const rating = await caretakerRatingRepo.findOne(id);    
+  
+      return rating;
     } catch (err) {
       console.log(err);
       return err;
