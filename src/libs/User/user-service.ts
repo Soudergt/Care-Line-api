@@ -4,30 +4,45 @@ import { User } from "../../Entities/user";
 export class UserService {
 
   public async getUsers() {
-    const userRepo = getRepository(User);
+    try {
+      const userRepo = getRepository(User);
 
-    const users = await userRepo.find();    
+      const users = await userRepo.find();
 
-    return users;
+      return users;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   }
 
   public async getPatients() {
-    const userRepo = getRepository(User);
+    try {
+      const userRepo = getRepository(User);
 
-    const patients = await userRepo.find({ where: { UserType: 'patient' }});    
-
-    return patients;
+      const patients = await userRepo.find({ where: { UserType: 'patient' }});    
+  
+      return patients;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   }
 
   public async getCaretakers() {
-    const userRepo = getRepository(User);
+    try {
+      const userRepo = getRepository(User);
 
-    const caretakers = await userRepo.find({ where: { UserType: 'caretaker' }});
-
-    return caretakers;
+      const caretakers = await userRepo.find({ where: { UserType: 'caretaker' }});
+  
+      return caretakers;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   }
 
-  public async getUser(uid: number): Promise<any> {
+  public async getUser(uid: number) {
     try {
       const userRepo = getRepository(User);
       
@@ -36,7 +51,7 @@ export class UserService {
       return user;
     } catch(err) {
       console.log(err);
-      
+      return err;
     }
   }
 
@@ -45,6 +60,7 @@ export class UserService {
       const userRepo = getRepository(User);
 
       const newUser = await userRepo.save(user);
+
       return newUser;
     } catch (err) {
       console.log(err);
