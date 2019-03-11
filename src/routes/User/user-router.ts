@@ -10,28 +10,88 @@ export class UserRouter {
       url: '/user/getUsers',
       method: 'GET',
       schema: {
-        // response: {
-        //   200: {
-        //     type: "object",
-        //     properties: {
-        //       data: {
-        //         additionalProperties: true,
-        //         users: {
-        //           type: "array"
-        //         },
-        //         type: "object"
-        //       }
-        //     }
-        //   },
-        //   400: {
-        //     properties: {
-        //       data: { type: "object" },
-        //       message: { type: "string" },
-        //       statusCode: { type: "integer" }
-        //     },
-        //     type: "object"
-        //   }
-        // }
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                users: {
+                  type: "array"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
+      handler: this.getPatients,
+      url: '/user/getPatients',
+      method: 'GET',
+      schema: {
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                patients: {
+                  type: "array"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
+      handler: this.getCaretakers,
+      url: '/user/getCaretakers',
+      method: 'GET',
+      schema: {
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                caretakers: {
+                  type: "array"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
       }
     });
 
@@ -71,37 +131,37 @@ export class UserRouter {
     fastify.route({
       handler: this.addUser,
       url: '/user/add',
-      method: 'GET',
+      method: 'POST',
       schema: {
-        // response: {
-        //   200: {
-        //     type: "object",
-        //     properties: {
-        //       data: {
-        //         additionalProperties: true,
-        //         user: {
-        //           type: "object"
-        //         },
-        //         type: "object"
-        //       }
-        //     }
-        //   },
-        //   400: {
-        //     properties: {
-        //       data: { type: "object" },
-        //       message: { type: "string" },
-        //       statusCode: { type: "integer" }
-        //     },
-        //     type: "object"
-        //   }
-        // }
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                user: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
       }
     });
 
     fastify.route({
       handler: this.editUser,
       url: '/user/edit',
-      method: 'GET',
+      method: 'PUT',
       schema: {
         response: {
           200: {
@@ -176,11 +236,45 @@ export class UserRouter {
     }
   }
 
+  private async getPatients(request: Request, reply: Response) {
+    try {
+      const patients = await new UserService().getPatients();
+
+      reply.code(200).send({
+        data: { patients },
+        message: "Successfully got users",
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: error,
+        statusCode: 400
+      });
+    }
+  }
+
+  private async getCaretakers(request: Request, reply: Response) {
+    try {
+      const caretakers = await new UserService().getCaretakers();
+
+      reply.code(200).send({
+        data: { caretakers },
+        message: "Successfully got users",
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: error,
+        statusCode: 400
+      });
+    }
+  }
+
   private async getUser(request: Request, reply: Response) {
     try {
       const { uid } = request.query;
 
-      const user = await new UserService().getUserV2(uid);
+      const user = await new UserService().getUser(uid);
             
       reply.code(200).send({
         data: { user },
@@ -197,9 +291,9 @@ export class UserRouter {
 
   private async addUser(request: Request, reply: Response) {
     try {
-      // const { newUser } = request.query;
+      const { newUser } = request.body;
 
-      const user = await new UserService().addUser();
+      const user = await new UserService().addUser(newUser);
       
       reply.code(200).send({
         data: { user },
@@ -216,7 +310,7 @@ export class UserRouter {
 
   private async editUser(request: Request, reply: Response) {
     try {
-      const { selectedUser } = request.query;
+      const { selectedUser } = request.body;
 
       const user = await new UserService().editUser(selectedUser);
       

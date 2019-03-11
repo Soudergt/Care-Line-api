@@ -11,20 +11,23 @@ export class UserService {
     return users;
   }
 
-  public getUser(uid: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const user = {
-        id: 10,
-        fn: 'Taylor',
-        ln: 'Williams',
-        clinic: 'Careline Clinic',
-        img: "url('/assets/images/people/caretakers/taylorwilliams.jpg')"
-      };
-      resolve(user);
-    });
+  public async getPatients() {
+    const userRepo = getRepository(User);
+
+    const patients = await userRepo.find({ where: { UserType: 'patient' }});    
+
+    return patients;
   }
 
-  public async getUserV2(uid: number): Promise<any> {
+  public async getCaretakers() {
+    const userRepo = getRepository(User);
+
+    const caretakers = await userRepo.find({ where: { UserType: 'caretaker' }});
+
+    return caretakers;
+  }
+
+  public async getUser(uid: number): Promise<any> {
     try {
       const userRepo = getRepository(User);
       
@@ -37,22 +40,10 @@ export class UserService {
     }
   }
 
-  public async addUser() {
+  public async addUser(user) {
     try {
       const userRepo = getRepository(User);
 
-      const user = {
-        UserType: 'caretaker',
-        UserEmail: 'twilliams@carelinetechnology.com',
-        Password: 'password',
-        NameFirst: 'Taylor',
-        NameLast: 'Williams',
-        MobilePhone: 6144997984,
-        DateOfBirth: new Date(),
-        FeaturesEnabled: true,
-        ActivationDate: new Date()
-      }
-  
       const newUser = await userRepo.save(user);
       return newUser;
     } catch (err) {
@@ -61,34 +52,20 @@ export class UserService {
     }
   }
 
-  public async editUser(data: any) {
+  public async editUser(user) {
     try {
       const userRepo = getRepository(User);
-      
-      const user = {
-        UserID: 2,
-        UserType: 'caretaker',
-        UserEmail: 'twilliams@carelinetechnology.com',
-        Password: 'password',
-        NameFirst: 'Taylor',
-        NameLast: 'Williams',
-        MobilePhone: 6144997984,
-        DateOfBirth: new Date(),
-        FeaturesEnabled: true,
-        ActivationDate: new Date(),
-        UserPhoto: '/assets/images/people/caretakers/taylorwilliams.jpg'
-      }
 
-      const newUser = await userRepo.save(user);
+      const editedUser = await userRepo.save(user);
 
-      return newUser;
+      return editedUser;
     } catch (err) {
       console.log(err);
       return err;
     }
   }
 
-  public async deleteUser(data: any) {
+  public async deleteUser(uid: number) {
     
   }
 }
