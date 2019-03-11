@@ -53,7 +53,7 @@ export class RatingRouter {
               data: {
                 additionalProperties: true,
                 rating: {
-                  type: "array"
+                  type: "object"
                 },
                 type: "object"
               }
@@ -119,7 +119,7 @@ export class RatingRouter {
               data: {
                 additionalProperties: true,
                 rating: {
-                  type: "array"
+                  type: "object"
                 },
                 type: "object"
               }
