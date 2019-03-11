@@ -7,7 +7,7 @@
   "password": "GoCubb1es!",
   "database": "CareLine_Dev2",
   "synchronize": true,
-  "logging": false,
+  "logging": ["error"],
   "entities": [
     "build/Entities/**/*.js"
   ],

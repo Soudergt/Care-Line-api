@@ -37,43 +37,41 @@ export class UserRouter {
 
     fastify.route({
       handler: this.getUser,
-      url: "/user/:uid",
+      url: "/user/getUser/:uid",
       method: "GET",
       schema: {
-        params: {
-          uid: {
-            type: "string"
-          }
+        querystring: {
+          uid: { type: 'number' }
         },
-        // response: {
-        //   200: {
-        //     type: "object",
-        //     properties: {
-        //       data: {
-        //         additionalProperties: true,
-        //         user: {
-        //           type: "object"
-        //         },
-        //         type: "object"
-        //       }
-        //     }
-        //   },
-        //   400: {
-        //     properties: {
-        //       data: { type: "object" },
-        //       message: { type: "string" },
-        //       statusCode: { type: "integer" }
-        //     },
-        //     type: "object"
-        //   }
-        // }
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                user: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
       }
     });
 
     fastify.route({
       handler: this.addUser,
       url: '/user/add',
-      method: 'POST',
+      method: 'GET',
       schema: {
         // response: {
         //   200: {
@@ -103,7 +101,7 @@ export class UserRouter {
     fastify.route({
       handler: this.editUser,
       url: '/user/edit',
-      method: 'POST',
+      method: 'GET',
       schema: {
         response: {
           200: {
@@ -180,7 +178,7 @@ export class UserRouter {
 
   private async getUser(request: Request, reply: Response) {
     try {
-      const { uid } = request.params;
+      const { uid } = request.query;
 
       const user = await new UserService().getUserV2(uid);
             

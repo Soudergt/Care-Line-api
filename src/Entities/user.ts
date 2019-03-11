@@ -12,34 +12,55 @@ export class User {
     @Column()
     UserEmail: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
+    Password: string;
+
+    @Column({
+        nullable: true
+    })
     NamePrefix: string;
 
     @Column()
     NameFirst: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     NameMiddle: string;
 
     @Column()
     NameLast: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     NameSuffix: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     JobTitle: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     HomeAddress: string;
 
-    @Column("bigint")
+    @Column({
+        type: "bigint",
+        nullable: true
+    })
     WorkPhone: number;
 
     @Column("bigint")
     MobilePhone: number;
 
-    @Column("bigint")
+    @Column({
+        type: "bigint",
+        nullable: true
+    })
     HomePhone: number;
 
     @Column()
@@ -48,22 +69,39 @@ export class User {
     @Column()
     FeaturesEnabled: boolean;
 
-    @Column("text")
+    @Column({
+        type: "text",
+        nullable: true
+    })
     UserPhoto: string;
 
-    @Column()
+    @Column({
+        type: "int",
+        nullable: true
+    })
     HeightInches: number;
 
-    @Column()
+    @Column({
+        type: "int",
+        nullable: true
+    })
     WeightPounds: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     BloodType: string;
 
-    @Column("text")
+    @Column({
+        type: "text",
+        nullable: true
+    })
     AllergyInfo: string;
 
-    @Column("text")
+    @Column({
+        type: "text",
+        nullable: true
+    })
     DietInfo: string;
 
 }

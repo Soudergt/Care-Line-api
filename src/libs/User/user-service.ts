@@ -1,12 +1,12 @@
-import { getManager } from "typeorm";
+import { getRepository } from "typeorm";
 import { User } from "../../Entities/user";
 
 export class UserService {
 
   public async getUsers() {
-    const entityManager = getManager();
+    const userRepo = getRepository(User);
 
-    const users = await entityManager.find(User);    
+    const users = await userRepo.find();    
 
     return users;
   }
@@ -24,10 +24,11 @@ export class UserService {
     });
   }
 
-  public async getUserV2(uid: string): Promise<any> {
+  public async getUserV2(uid: number): Promise<any> {
     try {
-      const entityManager = getManager();
-      const user = await entityManager.find(User);
+      const userRepo = getRepository(User);
+      
+      const user = await userRepo.findOne(uid);
 
       return user;
     } catch(err) {
@@ -37,26 +38,54 @@ export class UserService {
   }
 
   public async addUser() {
-    const entityManager = getManager();
+    try {
+      const userRepo = getRepository(User);
 
-    const user = {
-      UserType: 'caretaker',
-      UserEmail: 'twilliams@carelinetechnology.com',
-      Password: 'password',
-      NameFirst: 'Taylor',
-      NameLast: 'Williams',
-      MobilePhone: 6144997984,
-      DateOfBirth: new Date(),
-      FeaturesEnabled: true,
-      ActivationDate: new Date()
+      const user = {
+        UserType: 'caretaker',
+        UserEmail: 'twilliams@carelinetechnology.com',
+        Password: 'password',
+        NameFirst: 'Taylor',
+        NameLast: 'Williams',
+        MobilePhone: 6144997984,
+        DateOfBirth: new Date(),
+        FeaturesEnabled: true,
+        ActivationDate: new Date()
+      }
+  
+      const newUser = await userRepo.save(user);
+      return newUser;
+    } catch (err) {
+      console.log(err);
+      return err;
     }
-    // const newUser = entityManager.create(User);
-    const newUser = await entityManager.create(User, user);
-    return newUser;
   }
 
   public async editUser(data: any) {
-    
+    try {
+      const userRepo = getRepository(User);
+      
+      const user = {
+        UserID: 2,
+        UserType: 'caretaker',
+        UserEmail: 'twilliams@carelinetechnology.com',
+        Password: 'password',
+        NameFirst: 'Taylor',
+        NameLast: 'Williams',
+        MobilePhone: 6144997984,
+        DateOfBirth: new Date(),
+        FeaturesEnabled: true,
+        ActivationDate: new Date(),
+        UserPhoto: '/assets/images/people/caretakers/taylorwilliams.jpg'
+      }
+
+      const newUser = await userRepo.save(user);
+
+      return newUser;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   }
 
   public async deleteUser(data: any) {
