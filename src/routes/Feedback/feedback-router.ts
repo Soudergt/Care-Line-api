@@ -7,12 +7,32 @@ export class FeedbackRouter {
   constructor(fastify: FastifyInstance) {
     fastify.route({
       handler: this.getFeedback,
-      url: '/feedback/:uid',
+      url: '/feedback/getFeedback',
       method: 'GET',
       schema: {
-        params: {
-          uid: {
-            type: "string"
+        querystring: {
+          uid: { type: 'number' }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                feedback: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
           }
         }
       }
@@ -27,12 +47,11 @@ export class FeedbackRouter {
       
       reply.code(200).send({
         data: { feedback },
-        message: 'SUCCESS',
+        message: 'Successfully got feedback for user',
         statusCode: 200
       });
     } catch (error) {
       reply.code(400).send({
-        data: {},
         message: 'ERROR',
         statusCode: 400
       });
