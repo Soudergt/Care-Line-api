@@ -3,7 +3,7 @@ import { Request } from "../../interfaces/Request";
 import { Response } from "../../interfaces/Response";
 import { MessageService } from '../../libs/Message/message-service';
 
-export class StatusRouter {
+export class MessageRouter {
   constructor(fastify: FastifyInstance) {
     fastify.route({
       handler: this.getMessages,
