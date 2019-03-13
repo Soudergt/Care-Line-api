@@ -68,35 +68,35 @@ export class ClinicRouter {
       }
     });
 
-    // fastify.route({
-    //   handler: this.addClinic,
-    //   url: '/clinic/add',
-    //   method: 'GET',
-    //   schema: {
-    //     response: {
-    //       200: {
-    //         type: "object",
-    //         properties: {
-    //           data: {
-    //             additionalProperties: true,
-    //             clinic: {
-    //               type: "object"
-    //             },
-    //             type: "object"
-    //           }
-    //         }
-    //       },
-    //       400: {
-    //         properties: {
-    //           data: { type: "object" },
-    //           message: { type: "string" },
-    //           statusCode: { type: "integer" }
-    //         },
-    //         type: "object"
-    //       }
-    //     }
-    //   }
-    // });
+    fastify.route({
+      handler: this.addClinic,
+      url: '/clinic/add',
+      method: 'GET',
+      schema: {
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                clinic: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
   }
 
   private async getClinics(request: Request, reply: Response) {
