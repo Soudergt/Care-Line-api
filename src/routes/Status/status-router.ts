@@ -11,7 +11,7 @@ export class StatusRouter {
       method: 'GET',
       schema: {
         querystring: {
-          date: { type: 'date' }
+          date: { type: 'string' }
         },
         response: {
           200: {
