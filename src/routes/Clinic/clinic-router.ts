@@ -67,6 +67,36 @@ export class ClinicRouter {
         }
       }
     });
+
+    // fastify.route({
+    //   handler: this.addClinic,
+    //   url: '/clinic/add',
+    //   method: 'GET',
+    //   schema: {
+    //     response: {
+    //       200: {
+    //         type: "object",
+    //         properties: {
+    //           data: {
+    //             additionalProperties: true,
+    //             clinic: {
+    //               type: "object"
+    //             },
+    //             type: "object"
+    //           }
+    //         }
+    //       },
+    //       400: {
+    //         properties: {
+    //           data: { type: "object" },
+    //           message: { type: "string" },
+    //           statusCode: { type: "integer" }
+    //         },
+    //         type: "object"
+    //       }
+    //     }
+    //   }
+    // });
   }
 
   private async getClinics(request: Request, reply: Response) {
@@ -107,4 +137,22 @@ export class ClinicRouter {
     }
   }
 
+  private async addClinic(request: Request, reply: Response) {
+    try {
+      const { newClinic } = request.body;
+
+      const clinic = await new ClinicService().addClinic(newClinic);
+      
+      reply.code(200).send({
+        data: { clinic },
+        message: "Successfully created user",
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: error,
+        statusCode: 400
+      });
+    }
+  }
 }

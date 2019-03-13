@@ -9,7 +9,9 @@ export class Clinic {
     @Column()
     ClinicLongName: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     ClinicShortName: string;
 
     @Column()
@@ -21,12 +23,21 @@ export class Clinic {
     @Column()
     ClinicEmail: string;
 
-    @Column("text")
+    @Column({
+        type: "text",
+        nullable: true
+    })
     ClinicDescription: string;
 
-    @Column("text")
+    @Column({
+        type: "text",
+        nullable: true
+    })
     ClinicType: string;
 
-    @Column("text")
+    @Column({
+        type: "text",
+        nullable: true
+    })
     ClinicPhoto: string;
 }

@@ -27,4 +27,17 @@ export class ClinicService {
       return err;
     }
   }
+
+  public async addClinic(clinic: Clinic) {
+    try {
+      const clinicRepo = getRepository(Clinic);
+
+      const newClinic = await clinicRepo.save(clinic);
+
+      return newClinic;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
 }
