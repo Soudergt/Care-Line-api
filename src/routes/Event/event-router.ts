@@ -7,7 +7,7 @@ export class EventRouter {
   constructor(fastify: FastifyInstance) {
     fastify.route({
       handler: this.getEventsByWeek,
-      url: '/event/getEvents',
+      url: '/event/getEventsByWeek',
       method: 'GET',
       schema: {
         querystring: {
