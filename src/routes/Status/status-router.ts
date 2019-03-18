@@ -11,6 +11,7 @@ export class StatusRouter {
       method: 'GET',
       schema: {
         querystring: {
+          uid: { type: 'string' },
           date: { type: 'string' }
         },
         response: {
@@ -41,7 +42,9 @@ export class StatusRouter {
 
   private async getStatus(request: Request, reply: Response) {
     try {
-      const status = await new StatusService().getStatus();
+      const { uid, date } = request.query;
+
+      const status = await new StatusService().getStatus(uid, date);
       
       reply.code(200).send({
         data: { status },
