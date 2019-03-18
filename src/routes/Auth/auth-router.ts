@@ -2,6 +2,7 @@ import { FastifyInstance} from 'fastify';
 import { Request } from "../../interfaces/Request";
 import { Response } from "../../interfaces/Response";
 import { AuthService } from '../../libs/Auth/auth-service';
+import { ErrorHandler } from '../../utils/ErrorHandler';
 
 export class AuthRouter {
   constructor(fastify: FastifyInstance) {
@@ -12,27 +13,30 @@ export class AuthRouter {
       schema: {
         body: {
           properties: {
-            user: {
-              type: "object"
-            }
+            username: { type: "string" },
+            password: { type: "string" }
           }
         },
         response: {
           200: {
+            type: "object",
             properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
-            },
-            type: 'object'
+              data: {
+                additionalProperties: true,
+                user: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
           },
           400: {
             properties: {
-              data: { type: 'object' },
-              message: { type: 'string' },
-              statusCode: { type: 'integer' }
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
             },
-            type: 'object'
+            type: "object"
           }
         }
       }
@@ -67,21 +71,21 @@ export class AuthRouter {
 
   private async login(request: Request, reply: Response) {
     try {
-      const { info } = request.query;
+      const { username, password } = request.body;
 
-      const login = await new AuthService().login(info.username, info.password);
-      
+      const user = await new AuthService().login(username, password);
+
       reply.code(200).send({
-        data: {login: login},
+        data: { user },
         message: 'SUCCESS',
         statusCode: 200
       });
     } catch (error) {
-      reply.code(400).send({
-        data: {},
-        message: 'ERROR',
-        statusCode: 400
-      });
+      new ErrorHandler({
+        code: 400,
+        error,
+        message: "Invalid username or password",
+      }).handle(reply);
     }
   }
 
