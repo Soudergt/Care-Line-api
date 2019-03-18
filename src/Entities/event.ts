@@ -6,7 +6,12 @@ export class Event {
   @PrimaryGeneratedColumn()
   StatusID: number;
 
+  @Column()
+  EventName: string;
 
+  @Column()
+  EventDesc: string;
 
-    
+  @Column()
+  EventDate: Date;
 }
