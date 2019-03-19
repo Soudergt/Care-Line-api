@@ -10,7 +10,7 @@
   "redis": {
     "host": "localhost",
     "port": 6379,
-    "pass": ""
+    "ttl": 1800
   },
   "cors": {
     "origin": true,
