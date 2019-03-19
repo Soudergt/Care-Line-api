@@ -9,6 +9,7 @@ import * as fastifySwagger from "fastify-swagger";
 import * as fastifySession from "fastify-session";
 import { getSessionSecret } from "./utils/SessionSecret";
 import { fastifyorm } from "./utils/FastifyTypeorm";
+import AuthGate from "./utils/AuthGate";
 
 import routes from './routes';
 
@@ -32,19 +33,24 @@ const main = async () => {
   });
 
   const redisStore = RedisStore(fastifySession);
-
+  const store = new redisStore(config.get("redis"));  
+  
   const sessionOptions: any = {
     cookie: {
-      secure: false
+      secure: false,
+      expires: new Date('2020-03-19T20:07:37.404Z'),
     },
     secret: getSessionSecret(),
-    store: new redisStore(config.get("redis"))
+    saveUninitialized: false,
+    store: store
   };
 
+  fastify.register(fastifyorm).ready();
   fastify.register(fastifyCORS, config.get("cors"));
   fastify.register(fastifyCookie);
   fastify.register(fastifySession, sessionOptions);
-  fastify.register(fastifyorm).ready();
+
+  // fastify.addHook("preHandler", AuthGate);
 
   try {
     fastify.after(() => {
