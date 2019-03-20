@@ -8,8 +8,8 @@ export default (request: Request, reply: Response, next: any) => {
   const url = request.raw.url.substr(1);
   
   const isPublicRoute: boolean = [
-    "/api/auth/login",
-    "/api/auth/logout",
+    "api/auth/login",
+    "api/auth/logout",
   ].includes(url);
 
   if (!isPublicRoute && !hasSession) {
