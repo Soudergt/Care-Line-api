@@ -3,6 +3,71 @@ import { ClinicRating } from "../../Entities/clinic-rating";
 import { CaretakerRating } from "../../Entities/caretaker-rating";
 
 export class RatingService {
+  public async getCaretakerRatings(id: number) {
+    try {
+      const caretakerRatingRepo = getRepository(CaretakerRating);
+
+      const ratings = await caretakerRatingRepo.find();    
+  
+      return ratings;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  public async getCaretakerRating(id: number) {
+    try {
+      const caretakerRatingRepo = getRepository(CaretakerRating);
+
+      const rating = await caretakerRatingRepo.findOne(id);    
+  
+      return rating;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  public async addCaretakerRating(id: number, rating: any) {
+    try {
+      const caretakerRatingRepo = getRepository(CaretakerRating);
+
+      const newRating = await caretakerRatingRepo.save(rating);    
+  
+      return newRating;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  public async editCaretakerRating(rating: any) {
+    try {
+      const caretakerRatingRepo = getRepository(CaretakerRating);
+
+      const updatedRating = await caretakerRatingRepo.save(rating);    
+  
+      return updatedRating;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  public async deleteCaretakerRating(rating: any) {
+    try {
+      const caretakerRatingRepo = getRepository(CaretakerRating);
+
+      const removedRating = await caretakerRatingRepo.remove(rating);    
+  
+      return removedRating;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+  
   public async getClinicRatings(id: number) {
     try {
       const clinicRatingRepo = getRepository(ClinicRating);
@@ -29,26 +94,39 @@ export class RatingService {
     }
   }
 
-  public async getCaretakerRatings(id: number) {
+  public async addClinicRating(id: number, rating: any) {
     try {
-      const caretakerRatingRepo = getRepository(CaretakerRating);
+      const clinicRatingRepo = getRepository(CaretakerRating);
 
-      const ratings = await caretakerRatingRepo.find();    
+      const newRating = await clinicRatingRepo.save(rating);    
   
-      return ratings;
+      return newRating;
     } catch (err) {
       console.log(err);
       return err;
     }
   }
 
-  public async getCaretakerRating(id: number) {
+  public async editClinicRating(rating: any) {
     try {
-      const caretakerRatingRepo = getRepository(CaretakerRating);
+      const clinicRatingRepo = getRepository(CaretakerRating);
 
-      const rating = await caretakerRatingRepo.findOne(id);    
+      const updatedRating = await clinicRatingRepo.save(rating);    
   
-      return rating;
+      return updatedRating;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  public async deleteClinicRating(rating: any) {
+    try {
+      const clinicRatingRepo = getRepository(CaretakerRating);
+
+      const removedRating = await clinicRatingRepo.remove(rating);    
+  
+      return removedRating;
     } catch (err) {
       console.log(err);
       return err;
