@@ -54,7 +54,15 @@ const main = async () => {
 
   try {
     fastify.after(() => {
-      routes.forEach(Route => new Route(fastify));
+      routes.forEach(Route => {
+        const options: any = {};
+        options.prefix = '/api';
+
+        fastify.register((f, opts, next) => {
+          const r = new Route(f)
+          next();
+        }, options);
+      });
     });
 
     fastify.listen(config.get("server.port"), "0.0.0.0", (err ? : Error) => {
