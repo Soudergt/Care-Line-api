@@ -2,7 +2,8 @@
   "isProduction": false,
   "server": {
     "port": 3000,
-    "logger": true
+    "logger": true,
+    "prefix": "/api"
   },
   "session": {
     "salt": "asdf89ahs98dfh9a8sdfh978asdh789asnc98asd7j9ca"

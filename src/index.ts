@@ -50,13 +50,13 @@ const main = async () => {
   fastify.register(fastifyCookie);
   fastify.register(fastifySession, sessionOptions);
 
-  // fastify.addHook("preHandler", AuthGate);
+  fastify.addHook("preHandler", AuthGate);
 
   try {
     fastify.after(() => {
       routes.forEach(Route => {
         const options: any = {};
-        options.prefix = '/api';
+        options.prefix = config.get("server.prefix");
 
         fastify.register((f, opts, next) => {
           const r = new Route(f)
