@@ -15,13 +15,13 @@ export class MessageService {
     }
   }
 
-  public async sendMessage(id: number, message: string) {
+  public async sendMessage(id: number, message: any) {
     try {
       const messageRepo = getRepository(Message);
 
-      // const messages = await messageRepo.save();
+      const newMessage = await messageRepo.save(message);
   
-      return {};
+      return newMessage;
     } catch (err) {
       console.log(err);
       return err;

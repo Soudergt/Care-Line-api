@@ -41,8 +41,13 @@ export class MessageRouter {
     fastify.route({
       handler: this.sendMessage,
       url: '/message/send',
-      method: 'GET',
+      method: 'POST',
       schema: {
+        body: {
+          uid: { type: "number" },
+          message: { type: "object" },
+          type: "object"
+        },
         response: {
           200: {
             type: "object",
@@ -93,10 +98,10 @@ export class MessageRouter {
     try {
       const { id, message } = request.body;
 
-      const messages = await new MessageService().sendMessage(id, message);
+      const newMessage = await new MessageService().sendMessage(id, message);
       
       reply.code(200).send({
-        data: { messages },
+        data: { newMessage },
         message: 'SUCCESS',
         statusCode: 200
       });
