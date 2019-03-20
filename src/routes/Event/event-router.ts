@@ -106,6 +106,109 @@ export class EventRouter {
         }
       }
     });
+
+    fastify.route({
+      handler: this.addEvent,
+      url: '/event/add',
+      method: 'POST',
+      schema: {
+        body: {
+          event: { type: "object" },
+          uid: { type: "number" },
+          type: "object"
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                newEvent: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
+      handler: this.editEvent,
+      url: '/event/edit',
+      method: 'PUT',
+      schema: {
+        body: {
+          event: { type: "object" },
+          type: "object"
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                updatedEvent: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
+      handler: this.deleteEvent,
+      url: '/event/delete',
+      method: 'POST',
+      schema: {
+        body: {
+          event: { type: "object" },
+          type: "object"
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                removedEvent: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
   }
 
   private async getEventsByWeek(request: Request, reply: Response) {
@@ -163,6 +266,63 @@ export class EventRouter {
       reply.code(400).send({
         data: {},
         message: 'ERROR',
+        statusCode: 400
+      });
+    }
+  }
+
+  private async addEvent(request: Request, reply: Response) {
+    try {
+      const { uid, event } = request.body;
+
+      const newEvent = await new EventService().addEvent(uid, event);
+      
+      reply.code(200).send({
+        data: { newEvent },
+        message: "Successfully created event",
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: error,
+        statusCode: 400
+      });
+    }
+  }
+
+  private async editEvent(request: Request, reply: Response) {
+    try {
+      const event = request.body;
+
+      const updatedEvent = await new EventService().editEvent(event);
+      
+      reply.code(200).send({
+        data: { updatedEvent },
+        message: "Successfully updated event",
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: error,
+        statusCode: 400
+      });
+    }
+  }
+
+  private async deleteEvent(request: Request, reply: Response) {
+    try {
+      const event = request.body;
+
+      const removedEvent = await new EventService().deleteEvent(event);
+      
+      reply.code(200).send({
+        data: { removedEvent },
+        message: "Successfully removed event",
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: error,
         statusCode: 400
       });
     }
