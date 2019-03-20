@@ -6,6 +6,7 @@ export class SessionRouter {
   constructor(fastify: FastifyInstance) {
     fastify.route({
       handler: this.checkSession,
+      url: "/session/valid",
       method: "GET",
       schema: {
         response: {
@@ -21,8 +22,7 @@ export class SessionRouter {
             type: "string"
           }
         }
-      },
-      url: "/session/valid"
+      }
     });
   }
 
