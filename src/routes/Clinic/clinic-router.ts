@@ -71,15 +71,84 @@ export class ClinicRouter {
     fastify.route({
       handler: this.addClinic,
       url: '/clinic/add',
-      method: 'GET',
+      method: 'POST',
       schema: {
+        body: {
+          clinic: { type: "object" }
+        },
         response: {
           200: {
             type: "object",
             properties: {
               data: {
                 additionalProperties: true,
-                clinic: {
+                newClinic: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
+      handler: this.editClinic,
+      url: '/clinic/edit',
+      method: 'PUT',
+      schema: {
+        body: {
+          clinic: { type: "object" }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                updatedClinic: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
+      handler: this.deleteClinic,
+      url: '/clinic/delete',
+      method: 'POST',
+      schema: {
+        body: {
+          clinic: { type: "object" }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                removedClinic: {
                   type: "object"
                 },
                 type: "object"
@@ -139,13 +208,51 @@ export class ClinicRouter {
 
   private async addClinic(request: Request, reply: Response) {
     try {
-      const { newClinic } = request.body;
+      const clinic = request.body;
 
-      const clinic = await new ClinicService().addClinic(newClinic);
+      const newClinic = await new ClinicService().addClinic(clinic);
       
       reply.code(200).send({
-        data: { clinic },
-        message: "Successfully created user",
+        data: { newClinic },
+        message: "Successfully created clinic",
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: error,
+        statusCode: 400
+      });
+    }
+  }
+
+  private async editClinic(request: Request, reply: Response) {
+    try {
+      const clinic = request.body;
+
+      const updatedClinic = await new ClinicService().editClinic(clinic);
+      
+      reply.code(200).send({
+        data: { updatedClinic },
+        message: "Successfully updated clinic",
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: error,
+        statusCode: 400
+      });
+    }
+  }
+
+  private async deleteClinic(request: Request, reply: Response) {
+    try {
+      const clinic = request.body;
+
+      const removedClinic = await new ClinicService().deleteClinic(clinic);
+      
+      reply.code(200).send({
+        data: { removedClinic },
+        message: "Successfully removed clinic",
         statusCode: 200
       });
     } catch (error) {

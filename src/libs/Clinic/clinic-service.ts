@@ -40,4 +40,30 @@ export class ClinicService {
       return err;
     }
   }
+
+  public async editClinic(clinic: Clinic) {
+    try {
+      const clinicRepo = getRepository(Clinic);
+
+      const updatedClinic = await clinicRepo.save(clinic);
+
+      return updatedClinic;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  public async deleteClinic(clinic: Clinic) {
+    try {
+      const clinicRepo = getRepository(Clinic);
+
+      const removedClinic = await clinicRepo.remove(clinic);
+
+      return removedClinic;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
 }
