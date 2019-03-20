@@ -15,4 +15,30 @@ export class FeedbackService {
     }
   }
 
+  public async addFeedback(uid: number, feedback: any) {
+    try {
+      const feedbackRepo = getRepository(Feedback);
+
+      const newFeedback = await feedbackRepo.save(feedback);    
+  
+      return newFeedback;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  public async editFeedback(feedback: any) {
+    try {
+      const feedbackRepo = getRepository(Feedback);
+
+      const updatedFeedback = await feedbackRepo.save(feedback);    
+  
+      return updatedFeedback;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
 }

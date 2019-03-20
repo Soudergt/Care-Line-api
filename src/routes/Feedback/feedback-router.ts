@@ -41,13 +41,70 @@ export class FeedbackRouter {
 
   private async getFeedback(request: Request, reply: Response) {
     try {
-      const { uid } = request.params;
+      const { uid } = request.query;
 
       const feedback = await new FeedbackService().getFeedback(uid);
       
       reply.code(200).send({
         data: { feedback },
         message: 'Successfully got feedback for user',
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: 'ERROR',
+        statusCode: 400
+      });
+    }
+  }
+
+  private async addFeedback(request: Request, reply: Response) {
+    try {
+      const { uid, feedback } = request.body;
+
+      const newFeedback = await new FeedbackService().addFeedback(uid, feedback);
+      
+      reply.code(200).send({
+        data: { newFeedback },
+        message: 'Successfully created feedback',
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: 'ERROR',
+        statusCode: 400
+      });
+    }
+  }
+
+  private async editFeedback(request: Request, reply: Response) {
+    try {
+      const feedback = request.body;
+
+      const updatedFeedback = await new FeedbackService().editFeedback(feedback);
+      
+      reply.code(200).send({
+        data: { updatedFeedback },
+        message: 'Successfully updated feedback',
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: 'ERROR',
+        statusCode: 400
+      });
+    }
+  }
+
+  private async deleteFeedback(request: Request, reply: Response) {
+    try {
+      const feedback = request.body;
+
+      const removedFeedback = await new FeedbackService().deleteFeedback(feedback);
+      
+      reply.code(200).send({
+        data: { removedFeedback },
+        message: 'Successfully removed feedback',
         statusCode: 200
       });
     } catch (error) {
