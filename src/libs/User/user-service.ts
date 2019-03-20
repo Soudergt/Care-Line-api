@@ -55,7 +55,7 @@ export class UserService {
     }
   }
 
-  public async addUser(user) {
+  public async addUser(user: User) {
     try {
       const userRepo = getRepository(User);
 
@@ -68,7 +68,7 @@ export class UserService {
     }
   }
 
-  public async editUser(user) {
+  public async editUser(user: User) {
     try {
       const userRepo = getRepository(User);
 
@@ -81,7 +81,16 @@ export class UserService {
     }
   }
 
-  public async deleteUser(uid: number) {
-    
+  public async deleteUser(user: User) {
+    try {
+      const userRepo = getRepository(User);
+      
+      const removedUser = await userRepo.remove(user);
+
+      return removedUser;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   }
 }

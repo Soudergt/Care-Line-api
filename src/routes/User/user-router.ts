@@ -133,6 +133,10 @@ export class UserRouter {
       url: '/user/add',
       method: 'POST',
       schema: {
+        body: {
+          user: { type: "object" },
+          type: "object"
+        },
         response: {
           200: {
             type: "object",
@@ -163,6 +167,10 @@ export class UserRouter {
       url: '/user/edit',
       method: 'PUT',
       schema: {
+        body: {
+          user: { type: "object" },
+          type: "object"
+        },
         response: {
           200: {
             type: "object",
@@ -193,6 +201,10 @@ export class UserRouter {
       url: '/user/delete',
       method: 'POST',
       schema: {
+        body: {
+          user: { type: "object" },
+          type: "object"
+        },
         response: {
           200: {
             type: "object",
@@ -310,9 +322,9 @@ export class UserRouter {
 
   private async editUser(request: Request, reply: Response) {
     try {
-      const { selectedUser } = request.body;
+      const selectedUser = request.body;
 
-      const user = await new UserService().editUser(selectedUser);
+      const user = await new UserService().editUser(selectedUser.user);
       
       reply.code(200).send({
         data: { user },
@@ -329,9 +341,9 @@ export class UserRouter {
 
   private async deleteUser(request: Request, reply: Response) {
     try {
-      const { userID } = request.query;
-
-      const user = await new UserService().deleteUser(userID);
+      const selectedUser = request.body;
+      
+      const user = await new UserService().deleteUser(selectedUser.user);
       
       reply.code(200).send({
         data: { user },
