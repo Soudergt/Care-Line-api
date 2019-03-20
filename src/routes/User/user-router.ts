@@ -143,7 +143,7 @@ export class UserRouter {
             properties: {
               data: {
                 additionalProperties: true,
-                user: {
+                newUser: {
                   type: "object"
                 },
                 type: "object"
@@ -177,7 +177,7 @@ export class UserRouter {
             properties: {
               data: {
                 additionalProperties: true,
-                user: {
+                updatedUser: {
                   type: "object"
                 },
                 type: "object"
@@ -211,7 +211,7 @@ export class UserRouter {
             properties: {
               data: {
                 additionalProperties: true,
-                user: {
+                removedUser: {
                   type: "object"
                 },
                 type: "object"
@@ -303,12 +303,12 @@ export class UserRouter {
 
   private async addUser(request: Request, reply: Response) {
     try {
-      const { newUser } = request.body;
+      const user = request.body;
 
-      const user = await new UserService().addUser(newUser);
+      const newUser = await new UserService().addUser(user);
       
       reply.code(200).send({
-        data: { user },
+        data: { newUser },
         message: "Successfully created user",
         statusCode: 200
       });
@@ -322,12 +322,12 @@ export class UserRouter {
 
   private async editUser(request: Request, reply: Response) {
     try {
-      const selectedUser = request.body;
+      const user = request.body;
 
-      const user = await new UserService().editUser(selectedUser.user);
+      const updatedUser = await new UserService().editUser(user);
       
       reply.code(200).send({
-        data: { user },
+        data: { updatedUser },
         message: "Successfully edited user",
         statusCode: 200
       });
@@ -341,12 +341,12 @@ export class UserRouter {
 
   private async deleteUser(request: Request, reply: Response) {
     try {
-      const selectedUser = request.body;
+      const user = request.body;
       
-      const user = await new UserService().deleteUser(selectedUser.user);
+      const removedUser = await new UserService().deleteUser(user);
       
       reply.code(200).send({
-        data: { user },
+        data: { removedUser },
         message: "Successfully deleted user",
         statusCode: 200
       });
