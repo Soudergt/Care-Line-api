@@ -75,6 +75,8 @@ export class AuthRouter {
 
       const user = await new AuthService().login(username, password);
 
+      request.session.user = user;
+
       reply.code(200).send({
         data: { user },
         message: 'SUCCESS',
@@ -91,13 +93,22 @@ export class AuthRouter {
 
   private async logout(request: Request, reply: Response) {
     try {
-      const logout = await new AuthService().logout();
-      
-      reply.code(200).send({
-        data: {},
-        message: 'SUCCESS',
-        statusCode: 200
-      });
+      request.sessionStore.destroy(
+        request.session.sessionId,
+        (err) => {
+          if (err) {
+            return reply.code(400).send({
+              message: "Failed to log out",
+              status: "ERROR",
+            });
+          }
+
+          reply.code(200).send({
+            message: "Successfully logged out",
+            status: "SUCCESS",
+          });
+        }
+      );
     } catch (error) {
       reply.code(400).send({
         data: {},

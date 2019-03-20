@@ -33,7 +33,7 @@ const main = async () => {
   });
 
   const redisStore = RedisStore(fastifySession);
-  const store = new redisStore(config.get("redis"));  
+  const store = new redisStore(config.get("redis"));
   
   const sessionOptions: any = {
     cookie: {
