@@ -6,6 +6,7 @@ import { StatusRouter } from './Status/status-router';
 import { RatingRouter } from './Rating/rating-router';
 import { EventRouter } from './Event/event-router';
 import { MessageRouter } from './Message/message-router';
+import { SessionRouter } from './Session/session-router';
 
 export default [
   UserRouter,
@@ -15,5 +16,6 @@ export default [
   StatusRouter,
   RatingRouter,
   EventRouter,
-  MessageRouter
+  MessageRouter,
+  SessionRouter
 ];
