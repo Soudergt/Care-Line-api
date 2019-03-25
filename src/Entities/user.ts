@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable} from "typeorm";
+import { Clinic } from "./clinic";
 
 @Entity()
 export class User {
@@ -104,4 +105,7 @@ export class User {
     })
     DietInfo: string;
 
+    @ManyToMany(type => Clinic)
+    @JoinTable()
+    clinic: Clinic
 }

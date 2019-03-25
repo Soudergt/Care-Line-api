@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable} from "typeorm";
+import { User } from "./user";
 
 @Entity()
 export class Clinic {
@@ -40,4 +41,8 @@ export class Clinic {
         nullable: true
     })
     ClinicPhoto: string;
+
+    @ManyToMany(type => User)
+    @JoinTable()
+    user: User;
 }
