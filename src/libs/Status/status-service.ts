@@ -28,7 +28,7 @@ export class StatusService {
     }
   }
 
-  public async editStatus(uid: string, status: any) {
+  public async editStatus(status: any) {
     try {      
       const statusRepo = getRepository(Status);
 
@@ -41,7 +41,7 @@ export class StatusService {
     }
   }
 
-  public async deleteStatus(uid: string, status: any) {
+  public async deleteStatus(status: any) {
     try {      
       const statusRepo = getRepository(Status);
 

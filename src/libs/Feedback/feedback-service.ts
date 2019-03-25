@@ -41,4 +41,17 @@ export class FeedbackService {
     }
   }
 
+  public async deleteFeedback(feedback: any) {
+    try {
+      const feedbackRepo = getRepository(Feedback);
+
+      const removedFeedback = await feedbackRepo.remove(feedback);    
+  
+      return removedFeedback;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
 }
