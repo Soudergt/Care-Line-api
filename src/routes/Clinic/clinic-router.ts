@@ -208,7 +208,7 @@ export class ClinicRouter {
 
   private async addClinic(request: Request, reply: Response) {
     try {
-      const clinic = request.body;
+      const { clinic } = request.body;
 
       const newClinic = await new ClinicService().addClinic(clinic);
       
@@ -227,7 +227,7 @@ export class ClinicRouter {
 
   private async editClinic(request: Request, reply: Response) {
     try {
-      const clinic = request.body;
+      const { clinic } = request.body;
 
       const updatedClinic = await new ClinicService().editClinic(clinic);
       
@@ -246,7 +246,7 @@ export class ClinicRouter {
 
   private async deleteClinic(request: Request, reply: Response) {
     try {
-      const clinic = request.body;
+      const { clinic } = request.body;
 
       const removedClinic = await new ClinicService().deleteClinic(clinic);
       

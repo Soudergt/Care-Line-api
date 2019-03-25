@@ -292,7 +292,7 @@ export class EventRouter {
 
   private async editEvent(request: Request, reply: Response) {
     try {
-      const event = request.body;
+      const { event } = request.body;
 
       const updatedEvent = await new EventService().editEvent(event);
       
@@ -311,7 +311,7 @@ export class EventRouter {
 
   private async deleteEvent(request: Request, reply: Response) {
     try {
-      const event = request.body;
+      const { event } = request.body;
 
       const removedEvent = await new EventService().deleteEvent(event);
       

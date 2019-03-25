@@ -182,7 +182,7 @@ export class StatusRouter {
 
   private async editStatus(request: Request, reply: Response) {
     try {
-      const status = request.body;
+      const { status } = request.body;
 
       const updatedStatus = await new StatusService().editStatus(status);
       
@@ -202,7 +202,7 @@ export class StatusRouter {
 
   private async deleteStatus(request: Request, reply: Response) {
     try {
-      const status = request.body;
+      const { status } = request.body;
 
       const removedStatus = await new StatusService().deleteStatus(status);
       

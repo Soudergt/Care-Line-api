@@ -37,6 +37,106 @@ export class FeedbackRouter {
         }
       }
     });
+
+    fastify.route({
+      handler: this.addFeedback,
+      url: '/feedback/add',
+      method: 'POST',
+      schema: {
+        body: {
+          uid: { type: 'number' },
+          feedback: { type: 'object' }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                newFeedback: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
+      handler: this.editFeedback,
+      url: '/feedback/edit',
+      method: 'POST',
+      schema: {
+        body: {
+          feedback: { type: 'object' }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                updatedFeedback: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
+      handler: this.deleteFeedback,
+      url: '/feedback/delete',
+      method: 'POST',
+      schema: {
+        body: {
+          feedback: { type: 'object' }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                removedFeedback: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
   }
 
   private async getFeedback(request: Request, reply: Response) {
@@ -79,7 +179,7 @@ export class FeedbackRouter {
 
   private async editFeedback(request: Request, reply: Response) {
     try {
-      const feedback = request.body;
+      const { feedback } = request.body;
 
       const updatedFeedback = await new FeedbackService().editFeedback(feedback);
       
@@ -98,7 +198,7 @@ export class FeedbackRouter {
 
   private async deleteFeedback(request: Request, reply: Response) {
     try {
-      const feedback = request.body;
+      const { feedback } = request.body;
 
       const removedFeedback = await new FeedbackService().deleteFeedback(feedback);
       

@@ -405,7 +405,7 @@ export class RatingRouter {
 
   private async editCaretakerRating(request: Request, reply: Response) {
     try {
-      const rating = request.body;
+      const { rating } = request.body;
 
       const updatedRating = await new RatingService().editCaretakerRating(rating);
       
@@ -424,7 +424,7 @@ export class RatingRouter {
 
   private async deleteCaretakerRating(request: Request, reply: Response) {
     try {
-      const rating = request.body;
+      const { rating } = request.body;
 
       const removedRating = await new RatingService().deleteCaretakerRating(rating);
       
@@ -502,7 +502,7 @@ export class RatingRouter {
 
   private async editClinicRating(request: Request, reply: Response) {
     try {
-      const rating = request.body;
+      const { rating } = request.body;
 
       const updatedRating = await new RatingService().editClinicRating(rating);
       
@@ -521,7 +521,7 @@ export class RatingRouter {
 
   private async deleteClinicRating(request: Request, reply: Response) {
     try {
-      const rating = request.body;
+      const { rating } = request.body;
 
       const removedRating = await new RatingService().deleteClinicRating(rating);
       
