@@ -24,5 +24,4 @@ export class CaretakerRating {
 
     @ManyToOne(type => User, user => user.ratings)
     user: User;
-
 }

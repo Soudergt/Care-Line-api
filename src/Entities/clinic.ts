@@ -43,7 +43,5 @@ export class Clinic {
     ClinicPhoto: string;
 
     @OneToMany(type => ClinicRating, rating => rating.clinic)
-    ratings: ClinicRating[];
-
-    
+    ratings: ClinicRating[];   
 }
