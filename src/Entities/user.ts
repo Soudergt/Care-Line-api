@@ -1,7 +1,7 @@
 import { CaretakerRating } from './caretaker-rating';
 import { Status } from './status';
 import { Feedback } from './feedback';
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany} from "typeorm";
 import { Clinic } from "./clinic";
 import { Event } from "./event";
 
@@ -109,9 +109,9 @@ export class User {
     })
     DietInfo: string;
 
-    @ManyToMany(type => Clinic)
-    @JoinTable()
-    clinic: Clinic
+    @OneToOne(type => Clinic)
+    @JoinColumn()
+    clinic: Clinic;
 
     @OneToMany(type => Event, event => event.user)
     events: Event[];
