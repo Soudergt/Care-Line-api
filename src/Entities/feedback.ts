@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from "typeorm";
+import { User } from "./user";
 
 @Entity()
 export class Feedback {
@@ -21,7 +22,7 @@ export class Feedback {
     @Column()
     TimeUpdated: Date;
 
-    @Column()
-    FKUpdatedByUser: number;
+    @ManyToOne(type => User, user => user.feedbackList)
+    user: User;
 
 }

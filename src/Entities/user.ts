@@ -1,5 +1,9 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable} from "typeorm";
+import { CaretakerRating } from './caretaker-rating';
+import { Status } from './status';
+import { Feedback } from './feedback';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany} from "typeorm";
 import { Clinic } from "./clinic";
+import { Event } from "./event";
 
 @Entity()
 export class User {
@@ -108,4 +112,16 @@ export class User {
     @ManyToMany(type => Clinic)
     @JoinTable()
     clinic: Clinic
+
+    @OneToMany(type => Event, event => event.user)
+    events: Event[];
+
+    @OneToMany(type => Feedback, feedback => feedback.user)
+    feedbackList: Feedback[];
+
+    @OneToMany(type => Status, status => status.user)
+    statusList: Feedback[];
+
+    @OneToMany(type => CaretakerRating, rating => rating.user)
+    ratings: CaretakerRating[];
 }

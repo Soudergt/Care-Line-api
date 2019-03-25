@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from "typeorm";
+import { User } from "./user";
 
 @Entity()
 export class Status {
@@ -32,5 +33,8 @@ export class Status {
 
     @Column()
     FKUpdatedByCaretaker: number;
+
+    @ManyToOne(type => User, user => user.statusList)
+    user: User;
 
 }
