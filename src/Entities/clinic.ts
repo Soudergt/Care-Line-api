@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import { ClinicRating } from './clinic-rating';
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
 
 @Entity()
 export class Clinic {
@@ -40,6 +41,9 @@ export class Clinic {
         nullable: true
     })
     ClinicPhoto: string;
+
+    @OneToMany(type => ClinicRating, rating => rating.clinic)
+    ratings: ClinicRating[];
 
     
 }

@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import { Clinic } from './clinic';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from "typeorm";
 
 @Entity()
 export class ClinicRating {
@@ -20,4 +21,7 @@ export class ClinicRating {
 
     @Column()
     FKRatedByUser: number;
+
+    @ManyToOne(type => Clinic, clinic => clinic.ratings)
+    clinic: Clinic;
 }
