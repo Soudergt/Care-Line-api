@@ -303,7 +303,7 @@ export class UserRouter {
 
   private async addUser(request: Request, reply: Response) {
     try {
-      const user = request.body;
+      const { user } = request.body;
 
       const newUser = await new UserService().addUser(user);
       
@@ -322,7 +322,7 @@ export class UserRouter {
 
   private async editUser(request: Request, reply: Response) {
     try {
-      const user = request.body;
+      const { user } = request.body;
 
       const updatedUser = await new UserService().editUser(user);
       
@@ -341,7 +341,7 @@ export class UserRouter {
 
   private async deleteUser(request: Request, reply: Response) {
     try {
-      const user = request.body;
+      const { user } = request.body;
       
       const removedUser = await new UserService().deleteUser(user);
       

@@ -1,3 +1,4 @@
+import { Clinic } from './../../Entities/clinic';
 import { getRepository } from "typeorm";
 import { User } from "../../Entities/user";
 
@@ -46,7 +47,7 @@ export class UserService {
     try {
       const userRepo = getRepository(User);
       
-      const user = await userRepo.findOne(uid);
+      const user = await userRepo.findOne(uid, { relations: ["clinic"] });
 
       return user;
     } catch(err) {
