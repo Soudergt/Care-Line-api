@@ -8,31 +8,22 @@ export class Status {
     StatusID: number;
 
     @Column()
-    FKPatientID: number;
+    Title: string;
 
     @Column()
-    HealthRating: number;
+    Concerns: string;
+
+    @Column()
+    Activities: string;
 
     @Column()
     BehaviorMood: string;
 
     @Column("text")
-    DietPlan: string;
-
-    @Column("text")
-    PrescriptionInfo: string;
-
-    @Column("text")
-    TreatmentRecommendation: string;
-
-    @Column("text")
-    OtherComments: string;
+    Comments: string;
 
     @Column()
-    TimeUpdated: Date;
-
-    @Column()
-    FKUpdatedByCaretaker: number;
+    Date: String;
 
     @ManyToOne(type => User, user => user.statusList)
     user: User;

@@ -11,7 +11,7 @@ export class StatusRouter {
       method: 'GET',
       schema: {
         querystring: {
-          uid: { type: 'string' },
+          uid: { type: 'number' },
           date: { type: 'string' }
         },
         response: {
@@ -20,7 +20,7 @@ export class StatusRouter {
             properties: {
               data: {
                 additionalProperties: true,
-                clinics: {
+                status: {
                   type: "array"
                 },
                 type: "object"
@@ -45,7 +45,7 @@ export class StatusRouter {
       method: 'POST',
       schema: {
         body: {
-          uid: { type: 'number' },
+          user: { type: 'object' },
           status: { type: 'object' }
         },
         response: {
@@ -162,9 +162,9 @@ export class StatusRouter {
 
   private async addStatus(request: Request, reply: Response) {
     try {
-      const { uid, status } = request.body;
+      const { user, status } = request.body;
 
-      const newStatus = await new StatusService().addStatus(uid, status);
+      const newStatus = await new StatusService().addStatus(user, status);
       
       reply.code(200).send({
         data: { newStatus },

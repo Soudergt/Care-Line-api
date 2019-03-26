@@ -2,11 +2,16 @@ import { getRepository } from "typeorm";
 import { Status } from "../../Entities/status";
 
 export class StatusService {
-  public async getStatus(uid: string, date: string) {
-    try {      
+  public async getStatus(uid: number, date: string) {
+    try {
       const statusRepo = getRepository(Status);
 
-      const status = await statusRepo.findOne();
+      const status = await statusRepo.find({
+        where: {
+          userUserID: uid,
+          Date: date
+        }
+      });
 
       return status;
     } catch (err) {
@@ -15,12 +20,16 @@ export class StatusService {
     }
   }
 
-  public async addStatus(uid: string, status: any) {
-    try {      
+  public async addStatus(user: any, status: any) {
+    try {
       const statusRepo = getRepository(Status);
 
+      status.user = user;
+
       const newStatus = await statusRepo.save(status);
-      
+
+      console.log(newStatus);
+
       return newStatus;
     } catch (err) {
       console.log(err);
@@ -29,11 +38,11 @@ export class StatusService {
   }
 
   public async editStatus(status: any) {
-    try {      
+    try {
       const statusRepo = getRepository(Status);
 
       const updatedStatus = await statusRepo.save(status);
-      
+
       return updatedStatus;
     } catch (err) {
       console.log(err);
@@ -42,11 +51,11 @@ export class StatusService {
   }
 
   public async deleteStatus(status: any) {
-    try {      
+    try {
       const statusRepo = getRepository(Status);
 
       const removedStatus = await statusRepo.remove(status);
-      
+
       return removedStatus;
     } catch (err) {
       console.log(err);
