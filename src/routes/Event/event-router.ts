@@ -113,8 +113,8 @@ export class EventRouter {
       method: 'POST',
       schema: {
         body: {
+          user: { type: "object" },
           event: { type: "object" },
-          uid: { type: "number" },
           type: "object"
         },
         response: {
@@ -273,9 +273,9 @@ export class EventRouter {
 
   private async addEvent(request: Request, reply: Response) {
     try {
-      const { uid, event } = request.body;
+      const { user, event } = request.body;
 
-      const newEvent = await new EventService().addEvent(uid, event);
+      const newEvent = await new EventService().addEvent(user, event);
       
       reply.code(200).send({
         data: { newEvent },

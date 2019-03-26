@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { Event } from "../../Entities/event";
+import { User } from './../../Entities/user';
 
 export class EventService {
   public async getEvents(uid: number, date: string) {
@@ -41,9 +42,11 @@ export class EventService {
     }
   }
 
-  public async addEvent(uid: number, event: any) {
+  public async addEvent(user: User, event: any) {
     try {
       const eventRepo = getRepository(Event);
+
+      event.user = user;
 
       const newEvent = await eventRepo.save(event);
   

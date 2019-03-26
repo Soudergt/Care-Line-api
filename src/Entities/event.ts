@@ -5,7 +5,7 @@ import { User } from './user';
 export class Event {
 
   @PrimaryGeneratedColumn()
-  StatusID: number;
+  EventID: number;
 
   @Column()
   EventName: string;
