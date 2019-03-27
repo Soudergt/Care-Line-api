@@ -30,6 +30,7 @@
     "fastify-plugin": "^1.5.0",
     "fastify-session": "^2.0.0",
     "fastify-swagger": "^2.3.1",
+    "moment": "^2.24.0",
     "mssql": "^4.3.2",
     "pino": "^5.11.1",
     "redis-messaging-manager": "^1.6.0",

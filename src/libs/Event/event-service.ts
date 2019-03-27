@@ -1,15 +1,16 @@
 import { getRepository } from "typeorm";
 import { Event } from "../../Entities/event";
 import { User } from './../../Entities/user';
+import * as moment from 'moment';
 
 export class EventService {
   public async getEvents(uid: number, date: string) {
     try {
-      console.log(uid);
-      console.log(date);
-      
       const eventRepo = getRepository(Event);
       
+      console.log(date);
+      
+
       const events = await eventRepo.find({
         where: {
           userUserID: uid,
@@ -21,14 +22,30 @@ export class EventService {
     } catch (err) {
       console.log(err);
       return err;
-    }
+    } 
   }
 
   public async getEventsByWeek(uid: number, startDate: string) {
     try {
-      const eventRepo = getRepository(Event);
+      const eventRepo = getRepository(Event);      
 
-      const events = await eventRepo.findOne();    
+      let dates = [];
+      for(let i = 0; i < 7; i++) {
+        let newDate = moment(startDate).add(i, 'day');         
+        dates.push(newDate.toISOString());
+      }
+      
+      const events = await eventRepo.find({
+        where: [
+          { EventDate: dates[0], userUserID: uid },
+          { EventDate: dates[1], userUserID: uid },
+          { EventDate: dates[2], userUserID: uid },
+          { EventDate: dates[3], userUserID: uid },
+          { EventDate: dates[4], userUserID: uid },
+          { EventDate: dates[5], userUserID: uid },
+          { EventDate: dates[6], userUserID: uid }
+        ]
+      });
   
       return events;
     } catch (err) {
