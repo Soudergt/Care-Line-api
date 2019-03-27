@@ -5,9 +5,17 @@ import { User } from './../../Entities/user';
 export class EventService {
   public async getEvents(uid: number, date: string) {
     try {
+      console.log(uid);
+      console.log(date);
+      
       const eventRepo = getRepository(Event);
-
-      const events = await eventRepo.findOne();    
+      
+      const events = await eventRepo.find({
+        where: {
+          userUserID: uid,
+          EventDate: date
+        }
+      });
   
       return events;
     } catch (err) {

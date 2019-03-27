@@ -14,7 +14,10 @@ export class Event {
   EventDesc: string;
 
   @Column()
-  EventDate: Date;
+  EventDate: string;
+
+  @Column()
+  EventTime: string;
 
   @ManyToOne(type => User, user => user.events)
   user: User;
