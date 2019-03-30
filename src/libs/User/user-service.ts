@@ -21,7 +21,10 @@ export class UserService {
     try {
       const userRepo = getRepository(User);
 
-      const patients = await userRepo.find({ where: { UserType: 'patient' }});    
+      const patients = await userRepo.find({ 
+        where: { UserType: 'patient' },
+        relations: ['events']
+      });    
   
       return patients;
     } catch (err) {
