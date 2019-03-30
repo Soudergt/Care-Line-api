@@ -6,10 +6,7 @@ import * as moment from 'moment';
 export class EventService {
   public async getEvents(uid: number, date: string) {
     try {
-      const eventRepo = getRepository(Event);
-      
-      console.log(date);
-      
+      const eventRepo = getRepository(Event);      
 
       const events = await eventRepo.find({
         where: {
