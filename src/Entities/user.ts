@@ -110,6 +110,42 @@ export class User {
     })
     DietInfo: string;
 
+    @Column({
+        type: "text",
+        nullable: true
+    })
+    DietName: string;
+
+    @Column({
+        type: "text",
+        nullable: true
+    })
+    Likes: string;
+
+    @Column({
+        type: "text",
+        nullable: true
+    })
+    Dislikes: string;
+
+    @Column({
+        type: "text",
+        nullable: true
+    })
+    Medications: string;
+
+    @Column({
+        type: "text",
+        nullable: true
+    })
+    Exercise: string;
+
+    @Column({
+        type: "text",
+        nullable: true
+    })
+    PhysicalRestrictions: string;
+
     @ManyToOne(type => Clinic, clinic => clinic.users)
     clinic: Clinic;
 

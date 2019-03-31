@@ -5,7 +5,7 @@
   "port": 1433,
   "username": "CareLine",
   "password": "GoCubb1es!",
-  "database": "CareLine_Dev2",
+  "database": "CareLine_Dev3",
   "synchronize": true,
   "logging": ["error"],
   "entities": [
