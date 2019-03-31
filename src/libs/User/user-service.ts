@@ -36,7 +36,7 @@ export class UserService {
 
       const patients = await userRepo.find({ 
         where: { UserType: 'patient' },
-        relations: ['events']
+        relations: ['events', 'clinic']
       });    
   
       return patients;
@@ -50,7 +50,10 @@ export class UserService {
     try {
       const userRepo = getRepository(User);
 
-      const caretakers = await userRepo.find({ where: { UserType: 'caretaker' }});
+      const caretakers = await userRepo.find({ 
+        where: { UserType: 'caretaker' },
+        relations: ['clinic']
+      });
   
       return caretakers;
     } catch (err) {

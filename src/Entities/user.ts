@@ -146,6 +146,18 @@ export class User {
     })
     PhysicalRestrictions: string;
 
+    @Column({
+        type: "text",
+        nullable: true
+    })
+    DietComments: string;
+
+    @Column({
+        type: "text",
+        nullable: true
+    })
+    TreatmentComments: string;
+
     @ManyToOne(type => Clinic, clinic => clinic.users)
     clinic: Clinic;
 
