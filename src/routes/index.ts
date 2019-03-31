@@ -7,6 +7,7 @@ import { RatingRouter } from './Rating/rating-router';
 import { EventRouter } from './Event/event-router';
 import { MessageRouter } from './Message/message-router';
 import { SessionRouter } from './Session/session-router';
+import { NeedsRouter } from './Needs/needs-router';
 
 export default [
   UserRouter,
@@ -17,5 +18,6 @@ export default [
   RatingRouter,
   EventRouter,
   MessageRouter,
-  SessionRouter
+  SessionRouter,
+  NeedsRouter
 ];

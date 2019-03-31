@@ -4,6 +4,7 @@ import { Feedback } from './feedback';
 import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany} from "typeorm";
 import { Clinic } from "./clinic";
 import { Event } from "./event";
+import { Needs } from './needs';
 
 @Entity()
 export class User {
@@ -121,6 +122,9 @@ export class User {
 
     @OneToMany(type => Status, status => status.user)
     statusList: Status[];
+
+    @OneToMany(type => Needs, needs => needs.user)
+    needsList: Needs[];
 
     @OneToMany(type => CaretakerRating, rating => rating.user)
     ratings: CaretakerRating[];
