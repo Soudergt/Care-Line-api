@@ -20,6 +20,30 @@ export class StatusService {
     }
   }
 
+  public async getStatusCounts(uids: string) {
+    try {
+      let uidsArray = uids.split(',');      
+      let statusCounts = [];
+      const statusRepo = getRepository(Status);
+
+      for(let i = 0; i < uidsArray.length; i++) {
+        const count = await statusRepo.count({ 
+          where: {userUserID: JSON.parse(uidsArray[i])}
+        });
+        statusCounts.push({
+          user: uidsArray[i],
+          count: count
+        });
+      }
+      console.log(statusCounts);
+
+      return statusCounts;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
   public async addStatus(user: any, status: any) {
     try {
       const statusRepo = getRepository(Status);

@@ -229,6 +229,39 @@ export class UserRouter {
         }
       }
     });
+
+    fastify.route({
+      handler: this.getStatusCounts,
+      url: '/user/getStatusCounts',
+      method: 'GET',
+      schema: {
+        querystring: {
+          uids: { type: 'string' }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                counts: {
+                  type: "array"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
   }
 
   private async getUsers(request: Request, reply: Response) {
@@ -353,6 +386,26 @@ export class UserRouter {
     } catch (error) {
       reply.code(400).send({
         message: error,
+        statusCode: 400
+      });
+    }
+  }
+
+  private async getStatusCounts(request: Request, reply: Response) {
+    try {
+      const { uids } = request.query;
+
+      const counts = await new UserService().getStatusCounts(uids);
+      
+      reply.code(200).send({
+        data: { counts },
+        message: 'SUCCESS',
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        data: {},
+        message: 'ERROR',
         statusCode: 400
       });
     }

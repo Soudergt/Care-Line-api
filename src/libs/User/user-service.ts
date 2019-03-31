@@ -97,4 +97,28 @@ export class UserService {
       return err;
     }
   }
+
+  public async getStatusCounts(uids: string) {
+    try {
+      let uidsArray = uids.split(',');      
+      let statusCounts = [];
+      const userRepo = getRepository(User);
+
+      for(let i = 0; i < uidsArray.length; i++) {
+        const user = await userRepo.findOne({
+          where: {UserID: JSON.parse(uidsArray[i])},
+          relations: ['statusList']
+        });
+        statusCounts.push({
+          user: user
+        });
+      }
+      console.log(statusCounts);
+
+      return statusCounts;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
 }

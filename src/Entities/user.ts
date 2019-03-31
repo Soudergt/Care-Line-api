@@ -120,7 +120,7 @@ export class User {
     feedbackList: Feedback[];
 
     @OneToMany(type => Status, status => status.user)
-    statusList: Feedback[];
+    statusList: Status[];
 
     @OneToMany(type => CaretakerRating, rating => rating.user)
     ratings: CaretakerRating[];

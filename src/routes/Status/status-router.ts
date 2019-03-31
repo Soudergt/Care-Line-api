@@ -40,6 +40,39 @@ export class StatusRouter {
     });
 
     fastify.route({
+      handler: this.getStatusCounts,
+      url: '/status/getStatusCounts',
+      method: 'GET',
+      schema: {
+        querystring: {
+          uids: { type: 'string' }
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                counts: {
+                  type: "array"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
       handler: this.addStatus,
       url: '/status/add',
       method: 'POST',
@@ -148,6 +181,26 @@ export class StatusRouter {
       
       reply.code(200).send({
         data: { status },
+        message: 'SUCCESS',
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        data: {},
+        message: 'ERROR',
+        statusCode: 400
+      });
+    }
+  }
+
+  private async getStatusCounts(request: Request, reply: Response) {
+    try {
+      const { uids } = request.query;
+
+      const counts = await new StatusService().getStatusCounts(uids);
+      
+      reply.code(200).send({
+        data: { counts },
         message: 'SUCCESS',
         statusCode: 200
       });
