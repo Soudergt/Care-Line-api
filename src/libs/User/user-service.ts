@@ -17,6 +17,19 @@ export class UserService {
     }
   }
 
+  public async removeUsers() {
+    try {
+      const userRepo = getRepository(User);
+
+      const users = await userRepo.clear();
+
+      return users;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
   public async getPatients() {
     try {
       const userRepo = getRepository(User);

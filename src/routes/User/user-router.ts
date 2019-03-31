@@ -129,6 +129,36 @@ export class UserRouter {
     });
 
     fastify.route({
+      handler: this.removeUsers,
+      url: "/user/removeUsers",
+      method: "GET",
+      schema: {
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              data: {
+                additionalProperties: true,
+                user: {
+                  type: "object"
+                },
+                type: "object"
+              }
+            }
+          },
+          400: {
+            properties: {
+              data: { type: "object" },
+              message: { type: "string" },
+              statusCode: { type: "integer" }
+            },
+            type: "object"
+          }
+        }
+      }
+    });
+
+    fastify.route({
       handler: this.addUser,
       url: '/user/add',
       method: 'POST',
@@ -324,6 +354,23 @@ export class UserRouter {
       reply.code(200).send({
         data: { user },
         message: "Successfully got user",
+        statusCode: 200
+      });
+    } catch (error) {
+      reply.code(400).send({
+        message: error,
+        statusCode: 400
+      });
+    }
+  }
+
+  private async removeUsers(request: Request, reply: Response) {
+    try {
+      const user = await new UserService().removeUsers();
+            
+      reply.code(200).send({
+        data: { user },
+        message: "Successfully removed users",
         statusCode: 200
       });
     } catch (error) {
