@@ -1,5 +1,6 @@
 import { ClinicRating } from './clinic-rating';
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
+import { User } from './user';
 
 @Entity()
 export class Clinic {
@@ -43,5 +44,8 @@ export class Clinic {
     ClinicPhoto: string;
 
     @OneToMany(type => ClinicRating, rating => rating.clinic)
-    ratings: ClinicRating[];   
+    ratings: ClinicRating[];
+
+    @OneToMany(type => User, user => user.clinic)
+    users: User[];
 }
