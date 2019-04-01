@@ -7,7 +7,7 @@ export default class Logger {
 
   constructor() {
     this.logger = Pino();
-    this.enabled = config.get("server.logger");
+    this.enabled = false;
   }
 
   public log(data: any) {

@@ -15,7 +15,7 @@ import routes from './routes';
 
 const main = async () => {
   const fastify = Fastify({
-    logger: config.get("server.logger")
+    logger: false
   });
 
   fastify.register(fastifySwagger, {
