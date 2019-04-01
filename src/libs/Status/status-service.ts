@@ -2,16 +2,15 @@ import { getRepository } from "typeorm";
 import { Status } from "../../Entities/status";
 
 export class StatusService {
-  public async getStatus(uid: number, date: string) {
+  public async getStatus(uid: string, date: string) {
     try {
       const statusRepo = getRepository(Status);
 
-      const status = await statusRepo.find({
-        where: {
-          userUserID: uid,
-          Date: date
-        }
-      });
+      const status = await statusRepo.createQueryBuilder("status")
+        .leftJoinAndSelect("status.user", "user")
+        .where("user.UserID = :id", { id: uid })
+        .andWhere("status.Date = :date", { date: date })
+        .getMany();
 
       return status;
     } catch (err) {
@@ -22,13 +21,13 @@ export class StatusService {
 
   public async getStatusCounts(uids: string) {
     try {
-      let uidsArray = uids.split(',');      
+      let uidsArray = uids.split(",");
       let statusCounts = [];
       const statusRepo = getRepository(Status);
 
-      for(let i = 0; i < uidsArray.length; i++) {
-        const count = await statusRepo.count({ 
-          where: {userUserID: JSON.parse(uidsArray[i])}
+      for (let i = 0; i < uidsArray.length; i++) {
+        const count = await statusRepo.count({
+          where: { userUserID: JSON.parse(uidsArray[i]) }
         });
         statusCounts.push({
           user: uidsArray[i],
