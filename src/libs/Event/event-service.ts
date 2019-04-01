@@ -12,7 +12,8 @@ export class EventService {
         where: {
           userUserID: uid,
           EventDate: date
-        }
+        },
+        relations: ['user']
       });
   
       return events;
@@ -28,7 +29,7 @@ export class EventService {
 
       let dates = [];
       for(let i = 0; i < 7; i++) {
-        let newDate = moment(startDate).add(i, 'day');         
+        let newDate = moment(startDate).add(i, 'day');
         dates.push(newDate.toISOString());
       }
       
@@ -41,7 +42,8 @@ export class EventService {
           { EventDate: dates[4], userUserID: uid },
           { EventDate: dates[5], userUserID: uid },
           { EventDate: dates[6], userUserID: uid }
-        ]
+        ],
+        relations: ['user']
       });
   
       return events;
