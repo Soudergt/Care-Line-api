@@ -10,6 +10,7 @@ import * as fastifySession from "fastify-session";
 import { getSessionSecret } from "./utils/SessionSecret";
 import { fastifyorm } from "./utils/FastifyTypeorm";
 import AuthGate from "./utils/AuthGate";
+import { RedisClient } from "redis";
 
 import routes from './routes';
 
