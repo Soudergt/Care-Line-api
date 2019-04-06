@@ -29,7 +29,7 @@ export class RatingService {
     }
   }
 
-  public async addCaretakerRating(id: number, rating: any) {
+  public async addCaretakerRating(rating: any) {
     try {
       const caretakerRatingRepo = getRepository(CaretakerRating);
 

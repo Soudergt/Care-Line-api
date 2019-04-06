@@ -8,16 +8,16 @@ export class CaretakerRating {
     CaretakerRatingID: number;
 
     @Column()
-    FKCaretakerID: number;
-
-    @Column()
-    StarRating: number;
+    Rating: number;
 
     @Column("text")
-    TextRating: string;
+    Title: string;
+
+    @Column("text")
+    Desc: string;
 
     @Column()
-    TimeUpdated: Date;
+    Date: string;
 
     @Column()
     FKRatedByUser: number;

@@ -78,7 +78,6 @@ export class RatingRouter {
       schema: {
         body: {
           rating: { type: "object" },
-          id: { type: "number" },
           type: "object"
         },
         response: {
@@ -386,9 +385,11 @@ export class RatingRouter {
 
   private async addCaretakerRating(request: Request, reply: Response) {
     try {
-      const { id, rating } = request.body;
+      const { rating } = request.body;
 
-      const newRating = await new RatingService().addCaretakerRating(id, rating);
+      rating.FKRatedByUser = request.session.user.UserID;
+
+      const newRating = await new RatingService().addCaretakerRating(rating);
       
       reply.code(200).send({
         data: { newRating },

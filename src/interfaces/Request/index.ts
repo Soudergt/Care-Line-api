@@ -6,7 +6,9 @@ export interface Request extends FastifyRequest<IncomingMessage> {
     destroy: (sessionId: string, callback: (err?: Error) => void) => void
   },
   session?: {
-    user?: {};
+    user?: {
+      UserID?: number
+    };
     sessionId: string;
   };
 }
