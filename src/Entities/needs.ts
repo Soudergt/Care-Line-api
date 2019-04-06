@@ -8,7 +8,13 @@ export class Needs {
     NeedsID: number;
 
     @Column()
-    desc: string;
+    Desc: string;
+
+    @Column()
+    Date: string;
+
+    @Column()
+    CreatedByID: string;
 
     @ManyToOne(type => User, user => user.needsList)
     user: User;

@@ -20,7 +20,7 @@ export class NeedsRouter {
             properties: {
               data: {
                 additionalProperties: true,
-                status: {
+                needs: {
                   type: "array"
                 },
                 type: "object"
@@ -45,7 +45,6 @@ export class NeedsRouter {
       method: 'POST',
       schema: {
         body: {
-          user: { type: 'object' },
           need: { type: 'object' }
         },
         response: {
@@ -144,10 +143,10 @@ export class NeedsRouter {
     try {
       const { uid } = request.query;
 
-      const status = await new NeedsService().getNeeds(uid);
+      const needs = await new NeedsService().getNeeds(uid);
       
       reply.code(200).send({
-        data: { status },
+        data: { needs },
         message: 'SUCCESS',
         statusCode: 200
       });
