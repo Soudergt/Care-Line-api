@@ -34,7 +34,6 @@ export class StatusService {
           count: count
         });
       }
-      console.log(statusCounts);
 
       return statusCounts;
     } catch (err) {
@@ -50,8 +49,6 @@ export class StatusService {
       status.user = user;
 
       const newStatus = await statusRepo.save(status);
-
-      console.log(newStatus);
 
       return newStatus;
     } catch (err) {
