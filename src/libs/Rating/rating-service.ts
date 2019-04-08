@@ -7,7 +7,10 @@ export class RatingService {
     try {
       const caretakerRatingRepo = getRepository(CaretakerRating);
 
-      const ratings = await caretakerRatingRepo.find();    
+      const ratings = await caretakerRatingRepo.createQueryBuilder("rating")
+        .leftJoinAndSelect("rating.user", "user")
+        .where("user.UserID = :id", { id: id })
+        .getMany();   
   
       return ratings;
     } catch (err) {

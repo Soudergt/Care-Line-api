@@ -11,7 +11,7 @@ export class RatingRouter {
       method: 'GET',
       schema: {
         querystring: {
-          id: { type: 'number' }
+          id: { type: 'string' }
         },
         response: {
           200: {
