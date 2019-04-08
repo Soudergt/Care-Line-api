@@ -8,7 +8,7 @@ export class NeedsRouter {
   constructor(fastify: FastifyInstance) {
     fastify.route({
       handler: this.getNeeds,
-      url: '/needs/getNeeds',
+      url: '/need/getNeeds',
       method: 'GET',
       schema: {
         querystring: {
@@ -143,7 +143,7 @@ export class NeedsRouter {
     try {
       const { uid } = request.query;
 
-      const needs = await new NeedsService().getNeeds(uid);
+      const needs = await new NeedsService().getNeeds(uid);      
       
       reply.code(200).send({
         data: { needs },
@@ -161,9 +161,11 @@ export class NeedsRouter {
 
   private async addNeed(request: Request, reply: Response) {
     try {
-      const { user, need } = request.body;
+      const { need } = request.body;
 
-      const newNeed = await new NeedsService().addNeed(user, need);
+      need.CreatedByID = request.session.user.UserID;
+
+      const newNeed = await new NeedsService().addNeed(need);
       
       reply.code(200).send({
         data: { newNeed },
