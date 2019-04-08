@@ -3,13 +3,13 @@ import { ClinicRating } from "../../Entities/clinic-rating";
 import { CaretakerRating } from "../../Entities/caretaker-rating";
 
 export class RatingService {
-  public async getCaretakerRatings(id: number) {
+  public async getCaretakerRatings(uid: string) {
     try {
       const caretakerRatingRepo = getRepository(CaretakerRating);
 
       const ratings = await caretakerRatingRepo.createQueryBuilder("rating")
         .leftJoinAndSelect("rating.user", "user")
-        .where("user.UserID = :id", { id: id })
+        .where("user.UserID = :id", { id: uid })
         .getMany();   
   
       return ratings;

@@ -7,11 +7,11 @@ export class RatingRouter {
   constructor(fastify: FastifyInstance) {
     fastify.route({
       handler: this.getCaretakerRatings,
-      url: '/rating/caretaker/getRatings',
+      url: '/ratings/caretaker/getRatings',
       method: 'GET',
       schema: {
         querystring: {
-          id: { type: 'string' }
+          uid: { type: 'string' }
         },
         response: {
           200: {
@@ -345,9 +345,9 @@ export class RatingRouter {
 
   private async getCaretakerRatings(request: Request, reply: Response) {
     try {
-      const { id } = request.query;
+      const { uid } = request.query;
 
-      const ratings = await new RatingService().getCaretakerRatings(id);
+      const ratings = await new RatingService().getCaretakerRatings(uid);
       
       reply.code(200).send({
         data: { ratings },
