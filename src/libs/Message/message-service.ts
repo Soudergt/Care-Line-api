@@ -6,7 +6,9 @@ export class MessageService {
     try {
       const messageRepo = getRepository(Message);
 
-      const messages = await messageRepo.find();    
+      const messages = await messageRepo.find({
+        relations: ['user']
+      });
   
       return messages;
     } catch (err) {
@@ -15,7 +17,7 @@ export class MessageService {
     }
   }
 
-  public async sendMessage(id: number, message: any) {
+  public async sendMessage(message: any) {
     try {
       const messageRepo = getRepository(Message);
 

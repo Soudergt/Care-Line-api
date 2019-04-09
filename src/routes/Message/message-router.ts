@@ -44,7 +44,6 @@ export class MessageRouter {
       method: 'POST',
       schema: {
         body: {
-          uid: { type: "number" },
           message: { type: "object" },
           type: "object"
         },
@@ -96,9 +95,9 @@ export class MessageRouter {
 
   private async sendMessage(request: Request, reply: Response) {
     try {
-      const { id, message } = request.body;
+      const { message } = request.body;      
 
-      const newMessage = await new MessageService().sendMessage(id, message);
+      const newMessage = await new MessageService().sendMessage(message);
       
       reply.code(200).send({
         data: { newMessage },

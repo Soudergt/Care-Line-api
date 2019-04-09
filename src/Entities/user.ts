@@ -1,3 +1,4 @@
+import { Message } from './message';
 import { CaretakerRating } from './caretaker-rating';
 import { Status } from './status';
 import { Feedback } from './feedback';
@@ -169,6 +170,9 @@ export class User {
 
     @OneToMany(type => Status, status => status.user)
     statusList: Status[];
+
+    @OneToMany(type => Message, message => message.user)
+    messages: Message[];
 
     @OneToMany(type => Needs, needs => needs.user)
     needsList: Needs[];
